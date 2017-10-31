@@ -1,8 +1,8 @@
 var Sequelize = require('sequelize');
-var db = require('../db'); 
+var db = require('../db');
 
 var Status = db.define('status', {
-    type: {
+    name: {
         type: Sequelize.CHAR,
         defaultValue: 'Preparing',
         allowNull: false
