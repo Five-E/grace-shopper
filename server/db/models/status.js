@@ -4,7 +4,8 @@ var db = require('../db');
 var Status = db.define('status', {
     type: {
         type: Sequelize.CHAR,
-        defaultValue: 'Preparing'
+        defaultValue: 'Preparing',
+        allowNull: false
     }
 });
 
