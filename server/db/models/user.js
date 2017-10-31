@@ -26,15 +26,15 @@ const User = db.define('user', {
   },
   street: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
   },
   city: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
   },
   state: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
   },
   zip: {
     type: Sequelize.STRING,
