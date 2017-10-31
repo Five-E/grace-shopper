@@ -5,7 +5,10 @@ var CartItem = db.define('cartItem', {
     quantity: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            min: 0
+        }
     }
 });
 
