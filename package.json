@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "adoptARock",
   "version": "1.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "adopt a rock! powered by Dwayne 'The Rock' Johnson",
   "engines": {
     "node": ">= 7.0.0"
   },
@@ -18,8 +18,8 @@
     "start-server": "NODE_ENV='development' nodemon server -e html,js,scss --ignore public",
     "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/rock' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js --compilers js:babel-register"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Five-E",
+  "license": "WWE",
   "dependencies": {
     "axios": "^0.15.3",
     "body-parser": "^1.16.1",
