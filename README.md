@@ -99,3 +99,41 @@ Ready to go world wide? Here's a guide to deployment!
 Now, you should be deployed!
 
 Why do all of these steps? The big reason is because we don't want our production server to be cluttered up with dev dependencies like webpack, but at the same time we don't want our development git-tracking to be cluttered with production build files like bundle.js! By doing these steps, we make sure our development and production environments both stay nice and clean!
+
+
+#######################
+
+### Routes
+
+```
+GET
+- all items (rocks) 
+- all categories 
+- all reviews 
+- all users
+- all orders 
+- all cartItems
+- all purchasedItems
+
+POST
+- new item
+- new category
+- new review
+- new user
+- new order
+- new cartItem
+- new purchasedItem
+
+PUT
+- update item info
+- update user info
+- update review info
+- update order info
+
+DELETE
+- item
+- user
+- category
+- review
+- order
+- cartItem
