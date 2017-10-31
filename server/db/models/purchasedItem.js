@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-module.exports = db.define('purchasedItem', {
+const PurchasedItem = module.exports = db.define('purchasedItem', {
     purchasePrice: {
         type: Sequelize.FLOAT(10, 2), 
         allowNull: false, 
@@ -11,4 +11,4 @@ module.exports = db.define('purchasedItem', {
     }
 }); 
 
-module.exports = PurchasedPrice; 
+module.exports = PurchasedItem; 

@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize'); 
 const db = require('../db'); 
 
-module.exports = db.define('review', {
+const Review = module.exports = db.define('review', {
     rating: {
         type: Sequelize.FLOAT(1, 1), 
         allowNull: false, 
