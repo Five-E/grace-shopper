@@ -10,15 +10,17 @@ const ProductList = (props) => {
   return (
     <div>
       <h3>Product List Page</h3>
-      {
-        items.map(item => {
-          return (
-            <div key={item.id}>
-              <ProductItem itemInfo={item} />
-            </div>
-          )
-        })
-      }
+      <div className="row">
+          {
+            items.map(item => {
+              return (
+                <div key={item.id}>
+                  <ProductItem itemInfo={item} />
+                </div>
+              )
+            })
+          }
+      </div>
     </div>
   )
 }
