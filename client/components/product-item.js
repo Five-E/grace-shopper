@@ -7,14 +7,14 @@ import { NavLink } from 'react-router-dom';
  * COMPONENT
  */
 export const ProductItem = (props) => {
-    
-    if (!props) return <div>Loading>... </div>; 
+
+    if (!props) return <div>Loading>... </div>;
 
     const { name, picture, price, id, description } = props.itemInfo;
 
     return (
         <div className="col-xs-18 col-sm-6 col-md-3">
-            <NavLink to={`/items/${id}`}>
+            <NavLink to={`/product-list/${id}`}>
                 <div className="thumbnail">
                     <img src={picture} className="item-img"/>
                     <div className="caption">
