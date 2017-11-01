@@ -4,6 +4,7 @@
 	"extends": "fullstack",
 	"rules": {
 		"semi": 0,
+		"class-methods-use-this": "off",
 		"new-cap": [1, { "capIsNewExceptions": ["Router"] }]
 	}
 }

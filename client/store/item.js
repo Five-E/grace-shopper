@@ -37,6 +37,7 @@ export default function (state = defaultItems, action) {
  */
 
 export const fetchItems = () => {
+  console.log('~~~~~~~~~ are we in here?')
   return function thunk (dispatch) {
     axios.get('/api/items')
     .then(res => {
