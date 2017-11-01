@@ -7,7 +7,10 @@ import { NavLink } from 'react-router-dom';
  * COMPONENT
  */
 export const ProductItem = (props) => {
-    const { name, picture, price, stock, description, id } = props;
+    
+    if (!props) return <div>Loading>... </div>; 
+
+    const { name, picture, price, stock, description, id } = props.itemInfo;
 
     return (
         <div>
