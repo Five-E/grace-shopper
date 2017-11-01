@@ -4,6 +4,9 @@
 	"extends": "fullstack",
 	"rules": {
 		"semi": 0,
+    "class-methods-use-this": "off",
+    "react/prefer-stateless-function": "off",
+    "react/self-closing-comp": "off",
 		"new-cap": [1, { "capIsNewExceptions": ["Router"] }]
 	}
 }

@@ -1,29 +1,38 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 /**
  * COMPONENT
  */
-export const SingleProduct = (props) => {
+export const SingleProductPage = (props) => {
     const { name, picture, price, stock, description } = props;
+    const id = props.match.params.itemsId; 
 
     return (
         <div>
             <img src={picture} />
             <h3>{name}</h3>
             <p>Description: {description}</p>
-            <p>Price: ${price}</p>
-            <p>In Stock: {stock}</p>
+            <p>Price:       ${price}</p>
+            <p>In Stock:    {stock}</p>
 
-            <form onSubmit={}>
+            <form onSubmit={handleSubmit}>
                 <select>
                     {quantityDropdown(stock)}
                 </select>
                 <button>Add to Cart</button>
             </form>
+
+            <h1>Reviews Placeholder</h1>
+            {/* Create Reviews List component */}
         </div>
     );
+}
+
+
+function handleSubmit(event) {
+    event.preventDefault(); 
+
 }
 
 function quantityDropdown(stock) {
@@ -37,8 +46,13 @@ function quantityDropdown(stock) {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
-
+const mapState = (state) => {}
+const mapDispatch = (dispatch) => {
+    return {
+        addToCart: function (items) {
+            //dispatch(OUR_THUNKER(items))
+        }
+    }
 }
 
-export default connect(mapState)(SingleProduct); 
+export default connect(null, mapDispatch)(SingleProductPage); 
