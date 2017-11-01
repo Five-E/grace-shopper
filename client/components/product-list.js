@@ -1,9 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
-/**
- * COMPONENT
- */
+
 const ProductList = (props) => {
 
   const items = props.items;
@@ -22,9 +20,6 @@ const ProductList = (props) => {
   )
 }
 
-/**
- * CONTAINER
- */
 const mapState = (state) => {
   return { items: state.items }
 }
@@ -32,8 +27,3 @@ const mapState = (state) => {
 const mapDispatch = null;
 
 export default connect(mapState, mapDispatch)(ProductList)
-
-/**
- * PROP TYPES
- */
-

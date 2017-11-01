@@ -1,24 +1,15 @@
 import axios from 'axios'
-import history from '../history'
 
-/**
- * ACTION TYPES
- */
-const ITEMS_FETCHED = 'ITEMS_FETCHED'
-
-/**
- * INITIAL STATE
- */
+/* -----------------    INITIAL STATE ------------------ */
 const defaultItems = []
 
-/**
- * ACTION CREATORS
- */
+/* -----------------    ACTION TYPES ------------------ */
+const ITEMS_FETCHED = 'ITEMS_FETCHED'
+
+/* ------------   ACTION CREATORS     ------------------ */
 const itemsFetched = items => ({type: ITEMS_FETCHED, items});
 
-/**
- * REDUCER
- */
+/* ------------       REDUCER     ------------------ */
 export default function (state = defaultItems, action) {
   let newState = state;
 
@@ -30,10 +21,9 @@ export default function (state = defaultItems, action) {
       return state
   }
 }
-/**
- * THUNK CREATORS
- */
 
+
+/* ------------   THUNK CREATORS     ------------------ */
 export const fetchItems = () => {
   return function thunk (dispatch) {
     axios.get('/api/items')
