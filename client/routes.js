@@ -6,18 +6,21 @@ import PropTypes from 'prop-types'
 import history from './history'
 import {Main, Login, Signup, UserHome} from './components'
 import {me} from './store'
+import { fetchItems } from './store/item'
+import ProductList from './components/product-list'
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
+
   componentDidMount () {
     this.props.loadInitialData()
   }
 
   render () {
     const {isLoggedIn} = this.props
-
+    console.log(this.props);
     return (
       <Router history={history}>
         <Main>
@@ -25,6 +28,7 @@ class Routes extends Component {
             {/* Routes placed here are available to all visitors */}
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path="/product-list" component={ProductList} />
             {
               isLoggedIn &&
                 <Switch>
@@ -55,7 +59,8 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
-      dispatch(me())
+      dispatch(me());
+      dispatch(fetchItems());
     }
   }
 }

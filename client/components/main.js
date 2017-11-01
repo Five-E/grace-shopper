@@ -1,10 +1,9 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
-import {logout} from '../store'
-import Item from '../store/item'
-//import {fetchItems} from '../store/item'
+import { connect } from 'react-redux'
+import { withRouter, Link } from 'react-router-dom'
+import { logout } from '../store'
+
 
 /**
  * COMPONENT
@@ -12,40 +11,33 @@ import Item from '../store/item'
  *  else common to our entire app. The 'picture' inside the frame is the space
  *  rendered out by the component's `children`.
  */
-class Main extends Comment {
-  componentDidMount() {
-    //this.props.fetchInitialData();
-  }
+class Main extends Component {
 
-  render(props) {
-    const {children, handleClick, isLoggedIn} = props
-    //console.log('!!!!!!!!!The Items we Got', items);
-
-      return (
-        <div>
-
+  render() {
+    const { children, handleClick, isLoggedIn } = this.props
+    return (
+      <div>
         <h1>BOILERMAKER</h1>
-          <nav>
-            {
-              isLoggedIn
-                ? <div>
-                  {/* The navbar will show these links after you log in */}
-                  <Link to="/home">Home</Link>
-                  <a href="#" onClick={handleClick}>Logout</a>
-                </div>
-                : <div>
-                  {/* The navbar will show these links before you log in */}
-                  <Link to="/login">Login</Link>
-                  <Link to="/signup">Sign Up</Link>
-                </div>
-            }
-          </nav>
-          <hr />
-          {children}
-        </div>
-      )
+        <nav>
+          {
+            isLoggedIn
+              ? <div>
+                {/* The navbar will show these links after you log in */}
+                <Link to="/home">Home</Link>
+                <a href="#" onClick={handleClick}>Logout</a>
+              </div>
+              : <div>
+                {/* The navbar will show these links before you log in */}
+                <Link to="/login">Login</Link>
+                <Link to="/signup">Sign Up</Link>
+              </div>
+          }
+        </nav>
+        <hr />
+        {children}
+      </div>
+    )
   }
-
 
 }
 
@@ -60,12 +52,9 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleClick () {
+    handleClick() {
       dispatch(logout())
-    },
-    // fetchInitialData: function() {
-    //   dispatch(fetchItems());
-    // }
+    }
   }
 }
 

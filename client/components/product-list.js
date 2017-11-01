@@ -1,38 +1,35 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {fetchItems} from '../store/item';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 /**
  * COMPONENT
  */
-class ProductList extends Component {
-  componentDidMount() {
-    this.props.fetchInitialData();
-  }
+const ProductList = (props) => {
 
-  render(props) {
-    return (
-      <div>
-        <h3>Product List</h3>
-      </div>
-    )
-  }
+  const items = props.items;
+
+  return (
+    <div>
+      <h3>Product List Page</h3>
+      {
+        items.map(item => {
+          return (
+            <div key={item.id}>{item.name}</div>
+          )
+        })
+      }
+    </div>
+  )
 }
 
 /**
  * CONTAINER
  */
 const mapState = (state) => {
-
+  return { items: state.items }
 }
 
-const mapDispatch = (dispatch) => {
-    return {
-      fetchInitialData: function() {
-      dispatch(fetchItems());
-    }
-  }
-}
+const mapDispatch = null;
 
 export default connect(mapState, mapDispatch)(ProductList)
 
