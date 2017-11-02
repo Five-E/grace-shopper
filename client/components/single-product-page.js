@@ -1,15 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { returnToProductList, addToCart } from '../store'
 
 /**
  * COMPONENT
  */
 export const SingleProductPage = (props) => {
    
-    const id = props.match.params.itemsId, 
-        targetItem = props.items.find(item => item.id === +id); 
+    const id = props.match.params.itemsId,
+        targetItem = props.items.find(item => item.id === +id);
 
-    if (!targetItem) return <div>Loading...</div>; 
+    if (!targetItem) return <div>Loading...</div>;
 
     const { name, picture, price, stock, description } = targetItem;
     
@@ -21,31 +22,23 @@ export const SingleProductPage = (props) => {
             <p>Price:       ${price}</p>
             <p>In Stock:    {stock}</p>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={props.handleSubmit}>
                 <select>
                     {quantityDropdown(stock)}
                 </select>
                 <button>Add to Cart</button>
             </form>
 
-            <button onClick={returnButton}>Return to List</button>
+            <button onClick={props.handleReturn}>Return to List</button>
             <h1>Reviews Placeholder</h1>
             {/* Create Reviews List component */}
         </div>
     );
 }
 
-function returnButton(event) {
-    history.pushState('/product-list'); 
-}
-
-function handleSubmit(event) {
-    event.preventDefault(); 
-}
-
 function quantityDropdown(stock) {
     let options = [];
-    for (let i = 1; i < stock+1; i++) {
+    for (let i = 1; i < stock + 1; i++) {
         options.push(i); 
     }
     return options.map(idx => <option key={idx}>{idx}</option>);
@@ -60,12 +53,18 @@ const mapState = (state) => {
         items: state.items
     }
 }
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, ownProps) => {
     return {
-        addToCart: function (items) {
-            //dispatch(OUR_THUNKER(items))
+        handleSubmit: (event) => {
+            event.preventDefault();
+            dispatch(addToCart(event.target.value));
+        },
+
+        handleReturn: (event) => {
+            event.preventDefault();
+            dispatch(returnToProductList(ownProps.history));
         }
     }
 }
 
-export default connect(mapState, mapDispatch)(SingleProductPage); 
+export default connect(mapState, mapDispatch)(SingleProductPage);
