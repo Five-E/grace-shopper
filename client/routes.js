@@ -10,6 +10,7 @@ import { fetchItems } from './store/item'
 import { fetchOrders } from './store/orders'
 import ProductList from './components/product-list'
 import OrderList from './components/order-list'
+import Cart from './components/cart'
 
 /**
  * COMPONENT
@@ -32,6 +33,7 @@ class Routes extends Component {
             <Route path="/product-list/:itemsId" component={SingleProductPage} />
             <Route path="/product-list" component={ProductList} />
             <Route path="/order-list" component={OrderList} />
+            <Route path="/cart" component={Cart} />
             {
               isLoggedIn &&
                 <Switch>

@@ -14,7 +14,7 @@ import { logout } from '../store'
 class Main extends Component {
 
   render() {
-    const { children, handleClick, isLoggedIn } = this.props; 
+    const { children, handleClick, isLoggedIn } = this.props;
 
     return (
       <div>
