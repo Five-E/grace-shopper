@@ -7,7 +7,9 @@ import history from './history'
 import {Main, Login, Signup, UserHome, SingleProductPage} from './components'
 import {me} from './store'
 import { fetchItems } from './store/item'
+import { fetchOrders } from './store/orders'
 import ProductList from './components/product-list'
+import OrderList from './components/order-list'
 
 /**
  * COMPONENT
@@ -30,6 +32,7 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/product-list/:itemsId" component={SingleProductPage} />
             <Route path="/product-list" component={ProductList} />
+            <Route path="/order-list" component={OrderList} />
             {
               isLoggedIn &&
                 <Switch>
@@ -60,8 +63,9 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
-      dispatch(me());
-      dispatch(fetchItems());
+      dispatch(me())
+      dispatch(fetchItems())
+      dispatch(fetchOrders())
     }
   }
 }

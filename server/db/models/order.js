@@ -9,12 +9,12 @@ const Order = db.define('order', {
 	totalPrice: {
 		type: Sequelize.VIRTUAL,
 		get: function () {
-			return this.purchasedItems.reduce((total, item) => {
+			let total = this.purchasedItems.reduce((total, item) => {
 				let itemTotal = (item.purchasePrice * item.purchaseQuantity)
-				// need to round due to .00002
-				itemTotal = Math.round(itemTotal * 100) / 100
-				return total + itemTotal
+				return Math.round((total + itemTotal)*100) / 100
 			}, 0)
+			// this returns a string that always has two decimal places
+			return '$ '+ parseFloat(total).toFixed(2)
 		}
 	},
 	itemQuantity: {
