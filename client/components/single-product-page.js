@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
 /**
  * COMPONENT
@@ -28,15 +29,12 @@ export const SingleProductPage = (props) => {
 				<button>Add to Cart</button>
 			</form>
 
-			<button onClick={returnButton}>Return to List</button>
+			<button><NavLink to={`/product-list`}>Return to List</NavLink></button>
+
 			<h1>Reviews Placeholder</h1>
 			{/* Create Reviews List component */}
 		</div>
 	);
-}
-
-function returnButton(event) {
-	history.pushState('/product-list');
 }
 
 function handleSubmit(event) {
