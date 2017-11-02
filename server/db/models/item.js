@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Category = db.model('category')
 
 const Item = db.define('item', {
 	name: {
@@ -11,7 +12,7 @@ const Item = db.define('item', {
 		defaultValue: '/images/defaultItem.jpg'
 	},
 	price: {
-		type: Sequelize.FLOAT(10, 2),
+		type: Sequelize.FLOAT(10, 2), // eslint-disable-line new-cap
 		allowNull: false,
 		validate: {
 			min: 0
@@ -28,6 +29,18 @@ const Item = db.define('item', {
 		type: Sequelize.TEXT,
 		defaultValue: 'one hot rock'
 	}
+}, {
+	defaultScope: {
+		include: [Category]
+	}
 })
+
+Item.getWithCategory = function(itemId) {
+	return Item.findAll(
+		{where: {id: itemId},
+		include: [{all: true}]
+		}
+	)
+}
 
 module.exports = Item
