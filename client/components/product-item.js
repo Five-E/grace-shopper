@@ -14,17 +14,19 @@ export const ProductItem = (props) => {
 
     return (
         <div className="col-xs-18 col-sm-6 col-md-3">
+        	<div className="thumbnail">
             <NavLink to={`/product-list/${id}`}>
-                <div className="thumbnail">
-                    <img src={picture} className="item-img"/>
-                    <div className="caption">
-                        <h3>{name}</h3>
-                        <p>{description}</p>
-                        <p>Price: ${price}</p>
-                        <p><a href="#" className="btn btn-info btn-xs" role="button">Add to Cart</a></p>
-                    </div>
-                </div>
-            </NavLink>
+							<img src={picture} className="item-img"/>
+						</NavLink>
+						<div className="caption">
+							<NavLink to={`/product-list/${id}`}>
+								<h3>{name}</h3>
+							</NavLink>
+							<p>{description}</p>
+							<p>Price: ${price}</p>
+							<p><a href="#" className="btn btn-info btn-xs" role="button">Add to Cart</a></p>
+						</div>
+					</div>
         </div>
     );
 }
