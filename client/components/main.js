@@ -14,10 +14,11 @@ import { logout } from '../store'
 class Main extends Component {
 
   render() {
-    const { children, handleClick, isLoggedIn } = this.props
+    const { children, handleClick, isLoggedIn } = this.props; 
+
     return (
       <div>
-        <h1>BOILERMAKER</h1>
+        <h1>Adopt A Rock</h1>
         <nav>
           {
             isLoggedIn
@@ -38,7 +39,6 @@ class Main extends Component {
       </div>
     )
   }
-
 }
 
 /**

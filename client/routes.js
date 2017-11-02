@@ -4,7 +4,7 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome} from './components'
+import {Main, Login, Signup, UserHome, SingleProductPage} from './components'
 import {me} from './store'
 import { fetchItems } from './store/item'
 import ProductList from './components/product-list'
@@ -28,6 +28,7 @@ class Routes extends Component {
             {/* Routes placed here are available to all visitors */}
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path="/product-list/:itemsId" component={SingleProductPage} />
             <Route path="/product-list" component={ProductList} />
             {
               isLoggedIn &&
