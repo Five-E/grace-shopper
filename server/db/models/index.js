@@ -8,7 +8,7 @@ const Review = require('./review')
 const Status = require('./status')
 
 
-// Associations, all fails anyway! :)
+// Associations, can you smell what the rock is cooking :)
 User.hasMany(CartItem)
 User.hasMany(Review)
 Item.hasMany(Review)
@@ -17,8 +17,7 @@ Item.belongsTo(Category)
 CartItem.belongsTo(User)
 CartItem.belongsTo(Item)
 Order.belongsTo(User)
-// Order.hasOne(Status)
-Status.hasOne(Order);
+Order.belongsTo(Status)
 Order.hasMany(PurchasedItem)
 Review.belongsTo(User)
 Review.belongsTo(Item)

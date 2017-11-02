@@ -141,21 +141,25 @@ const categoryData = [
 const purchasedItemData = [
   {
     purchasePrice: 55.10,
+    purchaseQuantity: 1,
     itemId: 2,
     orderId: 1
   },
   {
     purchasePrice: 15.00,
+    purchaseQuantity: 2,
     itemId: 3,
     orderId: 2
   },
   {
     purchasePrice: 5.60,
+    purchaseQuantity: 1,
     itemId: 4,
     orderId: 2
   },
   {
-    purchasePrice: 10.33,
+    purchasePrice: 10.01,
+    purchaseQuantity: 2,
     itemId: 2,
     orderId: 2
   }
