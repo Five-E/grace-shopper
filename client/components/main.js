@@ -31,6 +31,8 @@ class Main extends Component {
                 {/* The navbar will show these links before you log in */}
                 <Link to="/login">Login</Link>
                 <Link to="/signup">Sign Up</Link>
+                <Link to="/product-list">Products</Link>
+                <Link to="/cart">Cart Icon</Link>
               </div>
           }
         </nav>
