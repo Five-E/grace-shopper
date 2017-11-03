@@ -7,3 +7,11 @@ router.get('/', (req, res, next) => {
     .then(items => res.json(items))
     .catch(next)
 })
+
+router.post('/', (req, res, next) => {
+  Item.create(req.body)
+    .then((item) => {
+      res.json(item)
+    })
+    .catch(next)
+})
