@@ -12,6 +12,8 @@ import { fetchCategories } from './store/category'
 import ProductList from './components/product-list'
 import OrderList from './components/order-list'
 import AddItem from './components/add-item'
+import AdminItemList from './components/admin-item-list'
+import AdminItemEdit from './components/admin-item-edit'
 
 /**
  * COMPONENT
@@ -33,6 +35,8 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/product-list/:itemsId" component={SingleProductPage} />
             <Route path="/product-list" component={ProductList} />
+            <Route exact path="/admin-list/" component={AdminItemList} />
+            <Route path="/admin-list/:itemsId" component={AdminItemEdit} />
             <Route path="/order-list" component={OrderList} />
             <Route path="/add-item" component={AddItem} />
             {
