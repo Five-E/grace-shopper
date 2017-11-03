@@ -4,12 +4,10 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, SingleProductPage} from './components'
-import {me} from './store'
-import { fetchItems } from './store/item'
-import { fetchOrders } from './store/orders'
-import ProductList from './components/product-list'
-import OrderList from './components/order-list'
+import {Main, Login, Signup, UserHome, SingleProductPage, ProductList, OrderList, Sidebar } from './components'
+import { me, fetchItems, fetchOrders, fetchCategories } from './store'
+
+
 
 /**
  * COMPONENT
@@ -65,6 +63,7 @@ const mapDispatch = (dispatch) => {
       dispatch(me())
       dispatch(fetchItems())
       dispatch(fetchOrders())
+      dispatch(fetchCategories())
     }
   }
 }
