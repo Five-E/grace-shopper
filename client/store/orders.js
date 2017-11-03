@@ -28,7 +28,6 @@ export const fetchOrders = () => {
     axios.get('/api/orders')
     .then(res => {
       const orders = res.data;
-      console.log('orders', orders);
       dispatch(ordersFetched(orders));
     })
     .catch(() => console.log('Fetching orders unsuccessful'));
