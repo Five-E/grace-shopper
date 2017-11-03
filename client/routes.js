@@ -8,9 +8,11 @@ import { Main, Login, Signup, UserHome, SingleProductPage } from './components'
 import { me } from './store'
 import { fetchItems } from './store/item'
 import { fetchOrders } from './store/orders'
+import { fetchCategories } from './store/category'
 import ProductList from './components/product-list'
 import OrderList from './components/order-list'
 import Cart from './components/cart'
+import AddItem from './components/add-item'
 
 /**
  * COMPONENT
@@ -32,8 +34,14 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/product-list/:itemsId" component={SingleProductPage} />
             <Route path="/product-list" component={ProductList} />
-            <Route path="/order-list" component={OrderList} />
             <Route path="/cart" component={Cart} />
+            <Route path="/order-list" render={
+              () => {
+                return (<OrderList orders={this.props.orders} />)
+              }
+            } />
+            <Route path="/add-item" component={AddItem} />
+
             {
               isLoggedIn &&
               <Switch>
@@ -59,7 +67,8 @@ const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    orders: state.orders
   }
 }
 
@@ -69,6 +78,7 @@ const mapDispatch = (dispatch) => {
       dispatch(me())
       dispatch(fetchItems())
       dispatch(fetchOrders())
+      dispatch(fetchCategories())
     }
   }
 }

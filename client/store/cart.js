@@ -25,10 +25,12 @@ export default function (state = defaultCart, action) {
 
 /* ------------   THUNK CREATORs     ------------------ */
 export const putItemInCart = (item, user) => {
+  const obj = {itemId: item.id,
+               userId: user.id,
+               quantity: 1 }
   return function thunk (dispatch) {
-    console.log('MY USER FROM THUNK', user)
     if (user.id) {
-      axios.post(`api/cartItems`, item)
+      axios.post(`api/cartItems`, obj)
         .then(res => res.data)
         .catch(console.error)
     }

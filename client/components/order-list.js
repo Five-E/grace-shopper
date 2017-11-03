@@ -1,19 +1,17 @@
 import React from 'react'
-import { connect } from 'react-redux'
-
 
 const OrderList = (props) => {
 
-  const orders = props.orders;
+  const orders = props.orders
 
   return (
     <div>
       <h3>Orders List Page</h3>
       {
-        orders.map(order => {
+        orders ? orders.map(order => {
           return (
-            <div style={{ margin: '10px', padding: '15px', border: 'solid 1px black' }} key={order.id}>
-              <span style={{ fontWeight: 'bold', display: 'block' }}>order id</span>
+            <div id="order-box" style={{margin: '10px', padding: '15px', border: 'solid 1px black'}} key={order.id}>
+              <span style={{fontWeight: 'bold', display: 'block'}}>order id</span>
               {order.id}
               <span style={{ fontWeight: 'bold', display: 'block' }}>order by</span>
               {order.user.name}
@@ -25,16 +23,12 @@ const OrderList = (props) => {
               {order.itemQuantity}
             </div>
           )
-        })
+        }) : (<div id="warning">
+        The Rock can't cook up orders because we don't have any orders to cook. Get some people to buy rocks.
+        </div>)
       }
     </div>
   )
 }
 
-const mapState = (state) => {
-  return { orders: state.orders }
-}
-
-const mapDispatch = null;
-
-export default connect(mapState, mapDispatch)(OrderList)
+export default OrderList
