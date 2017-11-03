@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { addItem } from '../store/item'
 
 class AddItem extends Component {
 
@@ -10,6 +11,24 @@ class AddItem extends Component {
 
   submitHandler(event) {
     event.preventDefault()
+    const name = event.target.name.value;
+    const picture = event.target.picture.value;
+    const price = event.target.price.value;
+    const stock = event.target.stock.value;
+    const description = event.target.description.value;
+    const categoryId = event.target.category.value;
+
+    const newItem = {
+      name,
+      picture,
+      price,
+      stock,
+      description,
+      categoryId
+    }
+    this.props.addNewItem(newItem);
+    this.props.history.push('/product-list')
+    console.log('props', this.props);
   }
 
   render() {
@@ -24,7 +43,7 @@ class AddItem extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="picture">Picture</label>
-            <input name="email" type="text" className="form-control" id="inputPicture" placeholder="What's the picture link?" ></input>
+            <input name="picture" type="text" className="form-control" id="inputPicture" placeholder="What's the picture link?" ></input>
           </div>
           <div className="form-group">
             <label htmlFor="price">Price</label>
@@ -61,6 +80,12 @@ const mapState = (state) => {
   }
 }
 
-const mapDispatch = null
+const mapDispatch = (dispatch) => {
+  return {
+    addNewItem: function (item) {
+      dispatch(addItem(item))
+    }
+  }
+}
 
 export default connect(mapState, mapDispatch)(AddItem)
