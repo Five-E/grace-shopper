@@ -11,7 +11,7 @@ describe('Item routes', () => {
     return db.sync({force: true})
   })
 
-  describe('/api/items/', () => {
+  describe('API: items route tests', () => {
 
     beforeEach(() => {
       return Item.create({

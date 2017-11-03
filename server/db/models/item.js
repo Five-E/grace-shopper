@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-const Category = db.model('category')
+const Category = require('./category')
 
 const Item = db.define('item', {
 	name: {

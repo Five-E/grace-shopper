@@ -1,5 +1,8 @@
-var Sequelize = require('sequelize');
-var db = require('../db'); 
+var Sequelize = require('sequelize')
+var db = require('../db')
+
+const item = require('./item')
+const user = require('./user')
 
 var CartItem = db.define('cartItem', {
     quantity: {
@@ -10,6 +13,10 @@ var CartItem = db.define('cartItem', {
             min: 0
         }
     }
-});
+}, {
+    defaultScope: {
+        include: [ item, user ]
+    }
+})
 
-module.exports = CartItem;
+module.exports = CartItem

@@ -14,7 +14,7 @@ const Order = db.define('order', {
 				return Math.round((total + itemTotal)*100) / 100
 			}, 0)
 			// this returns a string that always has two decimal places
-			return '$ '+ parseFloat(total).toFixed(2)
+			return '$'+ parseFloat(total).toFixed(2)
 		}
 	},
 	itemQuantity: {

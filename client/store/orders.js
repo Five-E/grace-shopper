@@ -7,16 +7,16 @@ const defaultOrders = []
 const ORDERS_FETCHED = 'ORDERS_FETCHED'
 
 /* ------------   ACTION CREATORS     ------------------ */
-const ordersFetched = orders => ({type: ORDERS_FETCHED, orders});
+const ordersFetched = orders => ({type: ORDERS_FETCHED, orders})
 
 /* ------------       REDUCER     ------------------ */
 export default function (state = defaultOrders, action) {
-  let newState = state;
+  let newState = state
 
   switch (action.type) {
     case ORDERS_FETCHED:
-      newState = action.orders;
-      return newState;
+      newState = action.orders
+      return newState
     default:
       return state
   }
@@ -27,10 +27,10 @@ export const fetchOrders = () => {
   return function thunk (dispatch) {
     axios.get('/api/orders')
     .then(res => {
-      const orders = res.data;
-      dispatch(ordersFetched(orders));
+      const orders = res.data
+      dispatch(ordersFetched(orders))
     })
-    .catch(() => console.log('Fetching orders unsuccessful'));
+    .catch(() => console.log('Fetching orders unsuccessful'))
   }
 }
 
