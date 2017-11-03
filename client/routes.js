@@ -31,7 +31,11 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/product-list/:itemsId" component={SingleProductPage} />
             <Route path="/product-list" component={ProductList} />
-            <Route path="/order-list" component={OrderList} />
+            <Route path="/order-list" render={
+              () => {
+                return (<OrderList orders={this.props.orders} />)
+              }
+            } />
             {
               isLoggedIn &&
                 <Switch>
@@ -55,7 +59,8 @@ const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    orders: state.orders
   }
 }
 

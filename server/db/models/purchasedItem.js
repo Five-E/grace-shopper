@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const item = require('./item')
+const item = db.model('item')
 
 const PurchasedItem = module.exports = db.define('purchasedItem', {
     purchasePrice: {
@@ -18,10 +18,10 @@ const PurchasedItem = module.exports = db.define('purchasedItem', {
             min: 0
         }
     }
-},{
+}, {
     defaultScope: {
         include: [ item ]
     }
-}); 
+})
 
 module.exports = PurchasedItem

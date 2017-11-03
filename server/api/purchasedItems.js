@@ -7,3 +7,10 @@ router.get('/', (req, res, next) => {
     .then(PurchasedItems => res.json(PurchasedItems))
     .catch(next)
 })
+
+router.get('/:orderId', (req, res, next) => {
+  const orderId = req.params
+  PurchasedItem.findAll({ where: orderId })
+    .then(PurchasedItems => res.json(PurchasedItems))
+    .catch(next)
+})
