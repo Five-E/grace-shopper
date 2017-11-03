@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 class Cart extends Component {
   constructor(props) {
     super(props)
-
     this.quantityDropdown = this.quantityDropdown.bind(this)
   }
 
@@ -16,6 +15,7 @@ class Cart extends Component {
     return options.map(idx => <option key={idx}>{idx}</option>)
 
   }
+
   render() {
     return (
       <div>
@@ -45,9 +45,14 @@ class Cart extends Component {
 
 const mapState = (state) => {
   return {
+    user: state.user,
     cart: state.cart,
     items: state.items
   }
+}
+
+const mapDispatch = (dispatch) => {
+  // dispatch our action creator.
 }
 
 export default connect(mapState, null)(Cart)

@@ -23,11 +23,17 @@ export const ProductItem = (props) => {
 					</NavLink>
 					<p>{description}</p>
 					<p>Price: ${price}</p>
-					<a onClick={() => { props.addToCart(props.itemInfo) }} className="btn btn-info btn-xs" role="button">Add to Cart</a>
+					<a onClick={() => { props.addToCart(props.itemInfo, props.user) }} className="btn btn-info btn-xs" role="button">Add to Cart</a>
 				</div>
 			</div>
 		</div>
 	)
 }
 
-export default connect(null, null)(ProductItem)
+const mapState = (state) => {
+	return {
+		user: state.user
+	}
+}
+
+export default connect(mapState, null)(ProductItem)

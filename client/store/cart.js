@@ -1,4 +1,5 @@
 'use strict'
+import axios from 'axios'
 
 /* -----------------    INITIAL STATE ------------------ */
 const defaultCart = []
@@ -19,5 +20,18 @@ export default function (state = defaultCart, action) {
       return newState
     default:
       return state
+  }
+}
+
+/* ------------   THUNK CREATORs     ------------------ */
+export const putItemInCart = (item, user) => {
+  return function thunk (dispatch) {
+    console.log('MY USER FROM THUNK', user)
+    if (user.id) {
+      axios.post(`api/cartItems`, item)
+        .then(res => res.data)
+        .catch(console.error)
+    }
+    dispatch(addItemToCart(item))
   }
 }

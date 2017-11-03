@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ProductItem } from './product-item'
-import { addItemToCart } from '../store'
+import { putItemInCart  } from '../store'
 
 const ProductList = (props) => {
 
@@ -15,7 +15,7 @@ const ProductList = (props) => {
           items.map(item => {
             return (
               <div key={item.id}>
-                <ProductItem addToCart={props.addToCart} itemInfo={item} />
+                <ProductItem user={props.user} addToCart={props.addToCart} itemInfo={item} />
               </div>
             )
           })
@@ -26,13 +26,14 @@ const ProductList = (props) => {
 }
 
 const mapState = (state) => {
-  return { items: state.items }
+  return { items: state.items,
+           user: state.user }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
 	return {
-		addToCart (item) {
-			dispatch(addItemToCart(item))
+		addToCart (item, user) {
+			dispatch(putItemInCart(item, user))
 		}
 	}
 }
