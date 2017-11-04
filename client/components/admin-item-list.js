@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import  AdminItem from './admin-item'
+import AdminItem from './admin-item'
 
 
 const AdminItemList = (props) => {

@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
 
-/**
- * COMPONENT
- */
-export default class AdminItem extends Component {
 
+export default class AdminItem extends Component {
 
   render() {
     if (!this.props) return <div>Loading>... </div>;
