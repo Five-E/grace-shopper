@@ -13,6 +13,8 @@ import ProductList from './components/product-list'
 import OrderList from './components/order-list'
 import Cart from './components/cart'
 import AddItem from './components/add-item'
+import AdminItemList from './components/admin-item-list'
+import AdminItemEdit from './components/admin-item-edit'
 
 /**
  * COMPONENT
@@ -35,6 +37,8 @@ class Routes extends Component {
             <Route path="/product-list/:itemsId" component={SingleProductPage} />
             <Route path="/product-list" component={ProductList} />
             <Route path="/cart" component={Cart} />
+            <Route exact path="/admin-list/" component={AdminItemList} />
+            <Route path="/admin-list/:itemsId" component={AdminItemEdit} />
             <Route path="/order-list" render={
               () => {
                 return (<OrderList orders={this.props.orders} />)
