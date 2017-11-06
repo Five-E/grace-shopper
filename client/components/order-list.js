@@ -13,13 +13,13 @@ const OrderList = (props) => {
             <div id="order-box" style={{margin: '10px', padding: '15px', border: 'solid 1px black'}} key={order.id}>
               <span style={{fontWeight: 'bold', display: 'block'}}>order id</span>
               {order.id}
-              <span style={{fontWeight: 'bold', display: 'block'}}>order by</span>
+              <span style={{ fontWeight: 'bold', display: 'block' }}>order by</span>
               {order.user.name}
-              <span style={{fontWeight: 'bold', display: 'block'}}>order date</span>
+              <span style={{ fontWeight: 'bold', display: 'block' }}>order date</span>
               {order.createdAt}
-              <span style={{fontWeight: 'bold', display: 'block'}}>order total paid</span>
+              <span style={{ fontWeight: 'bold', display: 'block' }}>order total paid</span>
               {order.totalPrice}
-              <span style={{fontWeight: 'bold', display: 'block'}}>order item count</span>
+              <span style={{ fontWeight: 'bold', display: 'block' }}>order item count</span>
               {order.itemQuantity}
             </div>
           )
