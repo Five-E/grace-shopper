@@ -60,8 +60,8 @@ export const updateUser = (user) => {
 
 export const deleteUser = (userId) => {
   return function thunk(dispatch) {
-    dispatch(userDeleted(userId));
     axios.delete(`/api/users/${userId}`)
+      .then(() => { dispatch(userDeleted(userId)); })
       .catch(() => console.log('Deleting user unsuccessful'));
   }
 }
