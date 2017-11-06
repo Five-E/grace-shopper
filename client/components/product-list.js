@@ -49,7 +49,7 @@ class ProductList extends React.Component{
       />
         <div className="row">
           {
-            items.map(item => {
+           items.map(item => {
               return (
                 <div key={item.id}>
                   <ProductItem itemInfo={item} />

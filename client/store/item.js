@@ -5,11 +5,12 @@ const defaultItems = []
 
 /* -----------------    ACTION TYPES ------------------ */
 const ITEMS_FETCHED = 'ITEMS_FETCHED'
-const ITEMS_FILTERED_BY_CATEGORY = 'ITEMS_FILTERED_BY_CATEGORY'
+const ITEM_ADDED = 'ITEM_ADDED'
 
 /* ------------   ACTION CREATORS     ------------------ */
 const itemsFetched = items => ({type: ITEMS_FETCHED, items});
-const itemsFilteredByCategory = categoryId => ({type: ITEMS_FILTERED_BY_CATEGORY, categoryId})
+
+const itemAdded = item => ({type: ITEM_ADDED, item});
 
 /* ------------       REDUCER     ------------------ */
 export default function (state = defaultItems, action) {
@@ -21,11 +22,10 @@ export default function (state = defaultItems, action) {
       newState = action.items;
       return newState;
 
-    case ITEMS_FILTERED_BY_CATEGORY:
-      console.log('in TEMS_FILTERED_BY_CATEGORY, state', state)
-      newState = state.filter(item => item.categoryId === action.categoryId)
+    case ITEM_ADDED:
+      newState = newState.concat(action.item);
       return newState;
-
+      
     default:
       return state
   }
@@ -44,17 +44,13 @@ export const fetchItems = () => {
   }
 }
 
-export const filterItemsByCategoryId = (categoryId) => {
+export const addItem = (newItem) => {
   return function thunk (dispatch) {
-    axios.get('/api/items')
+    axios.post('/api/items', newItem)
     .then(res => {
-      const items = res.data;
-      dispatch(itemsFetched(items));
+      dispatch(itemAdded(res.data));
     })
-    .then(() => {
-      dispatch(itemsFilteredByCategory(categoryId));
-    })
-    .catch(() => console.log('Fetching items unsuccessful'));
+    .catch(() => console.log('Adding item unsuccessful'));
   }
 }
 
