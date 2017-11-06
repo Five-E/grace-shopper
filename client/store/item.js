@@ -23,6 +23,7 @@ export default function (state = defaultItems, action) {
   let newState = state;
 
   switch (action.type) {
+
     case ITEMS_FETCHED:
       newState = action.items
       return newState
