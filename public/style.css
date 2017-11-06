@@ -1,8 +1,21 @@
+
 .item-img {
     width: 20vw;
     height: 30vh;
 }
 
+.wrapper {
+    display: flex;
+    /* align-items: stretch; */
+}          
+
+.sidebar {
+    flex: 1;
+    min-width: 15vw;
+}
+
+.content {
+    flex: 6;
 .admin-item-img {
     width: 30vw;
     height: 30vh;
