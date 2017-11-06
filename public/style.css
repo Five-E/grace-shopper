@@ -7,7 +7,7 @@
 .wrapper {
     display: flex;
     /* align-items: stretch; */
-}          
+}
 
 .sidebar {
     flex: 1;
@@ -16,6 +16,8 @@
 
 .content {
     flex: 6;
+}
+
 .admin-item-img {
     width: 30vw;
     height: 30vh;
@@ -23,4 +25,8 @@
 
 .admin-item-edit{
   margin: 0 10vw 30px 10vw;
+}
+
+#delete {
+  margin-top: 50px;
 }
