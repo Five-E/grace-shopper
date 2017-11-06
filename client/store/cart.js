@@ -6,21 +6,27 @@ const defaultCart = {}
 
 /* -----------------    ACTION TYPES ------------------ */
 const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART'
+const CLEAR_CART = 'CLEAR_CART'
 
 /* ------------   ACTION CREATORS     ------------------ */
 export const addItemToCart = item => ({type: ADD_ITEM_TO_CART, item})
+export const clearCart = () => ({type: CLEAR_CART})
 
 /* ------------       REDUCER     ------------------ */
 export default function (state = defaultCart, action) {
   let newState = {...state}
-  console.log('current state', state)
   switch (action.type) {
+    case CLEAR_CART:
+      return defaultCart
     case ADD_ITEM_TO_CART:
       if (!newState[action.item.id]) {
-          newState[action.item.id] = 1
+          console.log("rocking actions", action)
+          const quantity = action.item.quantity ? action.item.quantity : 1
+          newState[action.item.id] = quantity
       } else {
         newState[action.item.id]++
       }
+      console.log('current state', newState)
       return newState
     default:
       return state
@@ -31,7 +37,7 @@ export default function (state = defaultCart, action) {
 export const putItemInCart = (item, user) => {
   const obj = {itemId: item.id,
                userId: user.id,
-               quantity: 1 }
+               quantity: item.quantity || 1 }
   return function thunk (dispatch) {
     if (user.id) {
       axios.post(`api/cartItems`, obj)
@@ -47,8 +53,8 @@ export const putItemInCart = (item, user) => {
           items[item.id]++
         } else {
           items[item.id] = 1
-          window.localStorage.setItem('cartItems', JSON.stringify(items))
         }
+        window.localStorage.setItem('cartItems', JSON.stringify(items))
       }
     }
     dispatch(addItemToCart(item))
