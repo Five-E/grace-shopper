@@ -16,5 +16,6 @@ export {default as AddItem} from './add-item'
 export {default as AdminItemEdit} from './admin-item-edit'
 export {default as AdminItemList} from './admin-item-list'
 
+export {default as Cart} from './cart'
 export {default as OrderItem} from './order-item'
 export {default as OrderItemEdit} from './order-item-edit'

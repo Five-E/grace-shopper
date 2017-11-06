@@ -52,7 +52,7 @@ class ProductList extends React.Component{
            items.map(item => {
               return (
                 <div key={item.id}>
-                  <ProductItem user={props.user} addToCart={props.addToCart} itemInfo={item} />
+                  <ProductItem user={this.props.user} addToCart={this.props.addToCart} itemInfo={item} />
                 </div>
               )
             })
