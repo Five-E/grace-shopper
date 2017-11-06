@@ -48,7 +48,7 @@ const Statuses = [
 
 const Orders = [{
   userId: 2,
-  statusId: 1
+  statusName: 'dwayning'
 }]
 
 const PurchaseItem = [{

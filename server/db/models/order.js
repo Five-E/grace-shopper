@@ -27,7 +27,7 @@ const Order = db.define('order', {
 	}
 }, {
 	defaultScope: {
-		include: [ user, status, purchasedItem ]
+		include: [ user, purchasedItem ]
 	}
 })
 

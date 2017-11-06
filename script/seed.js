@@ -211,11 +211,11 @@ const statusData = [
 
 const orderData = [
   {
-    statusId: 5,
+    statusName: 'ordered',
     userId: 3
   },
   {
-    statusId: 6,
+    statusName: 'dwayning',
     userId: 4
   }
 ];

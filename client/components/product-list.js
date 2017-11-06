@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ProductItem } from './product-item'
+import { putItemInCart  } from '../store'
 import Sidebar from './sidebar'
 import FilterInput from './filter-input'
 
@@ -17,6 +18,7 @@ class ProductList extends React.Component{
     this.filterItemsByCategory = this.filterItemsByCategory.bind(this);
   }
 
+
   filterItemsByCategory(item) {
     return item.categoryId === this.state.categoryId
   }
@@ -28,8 +30,6 @@ class ProductList extends React.Component{
 
 
   render() {
-    console.log('in product-list component, local state: ', this.state)
-    console.log('props', this.props)
     const inputValue = this.state.inputValue
     const inputRegEx = new RegExp(this.state.inputValue, 'i');
     // const items = this.props.items.filter(this.filterItemsByCategory).filter(item => item.name.match(inputValue));
@@ -52,7 +52,7 @@ class ProductList extends React.Component{
            items.map(item => {
               return (
                 <div key={item.id}>
-                  <ProductItem itemInfo={item} />
+                  <ProductItem user={this.props.user} addToCart={this.props.addToCart} itemInfo={item} />
                 </div>
               )
             })
@@ -66,11 +66,18 @@ class ProductList extends React.Component{
 
 
 const mapState = (state) => {
-  console.log('in product-list component, state: ', state)
-  return {
-    items: state.items,
-    categoryId: state.selectedCategory
-  }
+  return { items: state.items,
+           user: state.user,
+         categoryId: state.selectedCategory}
 }
 
-export default connect(mapState)(ProductList)
+const mapDispatch = (dispatch) => {
+	return {
+		addToCart (item, user) {
+			dispatch(putItemInCart(item, user))
+		}
+	}
+}
+
+export default connect(mapState, mapDispatch)(ProductList)
+
