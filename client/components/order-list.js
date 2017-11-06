@@ -24,6 +24,8 @@ const OrderList = (props) => {
               {order.totalPrice}
               <span style={{fontWeight: 'bold', paddingLeft: '15px', paddingRight: '5px'}}>order item count</span>
               {order.itemQuantity}
+              <span style={{fontWeight: 'bold', paddingLeft: '15px', paddingRight: '5px'}}>order state</span>
+              {order.statusName}
             </div></Link>
           )
         })

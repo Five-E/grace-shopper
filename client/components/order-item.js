@@ -18,7 +18,7 @@ const OrderItem = (props) => {
 			<div>
 				<Link to={`/order-list/edit/${order.id}`}>Edit This Order</Link> | <Link to={`/order-list/`}>View All Orders</Link>
 				<h1>Order #{order.id} Details</h1>
-				<h4>Status: {order.status.name}</h4>
+				<h4>Status: {order.statusName}</h4>
 				
 				<b>ordered by:</b> {order.user.name}<br />
 				<b>order date:</b> {order.createdAt}<br />
