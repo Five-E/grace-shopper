@@ -50,7 +50,7 @@ describe('Orders routes', () => {
           .expect(200)
           .then(res => {
             expect(res.body).to.be.an('array')
-            expect(res.body[0].status.id).to.be.equal(1)
+            expect(res.body[0].statusName).to.be.equal('dwayning')
             expect(res.body[0].user.id).to.be.equal(2)
             expect(res.body[0].purchasedItems).to.be.an('array')
             expect(res.body[0].purchasedItems[0].item.id).to.be.equal(1)
