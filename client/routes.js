@@ -4,8 +4,8 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, SingleProductPage, ProductList, OrderList, AddItem, AdminItemEdit, AdminItemList} from './components'
-import { me, fetchItems, fetchOrders, fetchCategories } from './store'
+import {Main, Login, Signup, UserHome, SingleProductPage, ProductList, OrderList, AddItem, AdminItemEdit, AdminItemList, AdminUserList, AdminUserEdit} from './components'
+import { me, fetchItems, fetchOrders, fetchCategories, fetchUsers } from './store'
 
 /**
  * COMPONENT
@@ -35,6 +35,8 @@ class Routes extends Component {
               }
             } />
             <Route path="/add-item" component={AddItem} />
+            <Route exact path="/admin-user-list" component={AdminUserList} />
+            <Route path="/admin-user-list/:userId" component={AdminUserEdit} />
             {
               isLoggedIn &&
                 <Switch>
@@ -70,6 +72,7 @@ const mapDispatch = (dispatch) => {
       dispatch(fetchItems())
       dispatch(fetchOrders())
       dispatch(fetchCategories())
+      dispatch(fetchUsers())
     }
   }
 }
