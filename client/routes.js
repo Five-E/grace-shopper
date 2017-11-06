@@ -4,10 +4,8 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, SingleProductPage, ProductList, OrderList, AddItem} from './components'
+import {Main, Login, Signup, UserHome, SingleProductPage, ProductList, OrderList, AddItem, AdminItemEdit, AdminItemList} from './components'
 import { me, fetchItems, fetchOrders, fetchCategories } from './store'
-
-
 
 /**
  * COMPONENT
@@ -29,6 +27,8 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/product-list/:itemsId" component={SingleProductPage} />
             <Route path="/product-list" component={ProductList} />
+            <Route exact path="/admin-list/" component={AdminItemList} />
+            <Route path="/admin-list/:itemsId" component={AdminItemEdit} />
             <Route path="/order-list" render={
               () => {
                 return (<OrderList orders={this.props.orders} />)

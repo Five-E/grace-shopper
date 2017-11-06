@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addItem } from '../store/item'
 
+
 class AddItem extends Component {
 
   constructor(props) {
