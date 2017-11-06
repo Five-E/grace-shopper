@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import {addItemToCart} from './cart'
 
 /**
  * ACTION TYPES
@@ -24,8 +25,9 @@ const removeUser = () => ({type: REMOVE_USER})
 export const me = () =>
   dispatch =>
     axios.get('/auth/me')
-      .then(res =>
-        dispatch(getUser(res.data || defaultUser)))
+      .then(res => {
+        dispatch(getUser(res.data || defaultUser))
+      })
       .catch(err => console.log(err))
 
 export const auth = (email, password, method) =>
@@ -33,6 +35,16 @@ export const auth = (email, password, method) =>
     axios.post(`/auth/${method}`, { email, password })
       .then(res => {
         dispatch(getUser(res.data))
+        if (res.data) {
+          const localCart = JSON.parse(window.localStorage.getItem('cartItems'))
+          for (let itemId in localCart) {
+            if (localCart.hasOwnProperty(itemId)) {
+              const item = {id: itemId, quantity: localCart[itemId]}
+              dispatch(addItemToCart(item))
+              window.localStorage.clear()
+            }
+          }
+        }
         history.push('/home')
       })
       .catch(error =>

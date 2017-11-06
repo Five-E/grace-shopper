@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 /* -----------------    INITIAL STATE ------------------ */
-const defaultCart = []
+const defaultCart = {}
 
 /* -----------------    ACTION TYPES ------------------ */
 const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART'
@@ -12,11 +12,15 @@ export const addItemToCart = item => ({type: ADD_ITEM_TO_CART, item})
 
 /* ------------       REDUCER     ------------------ */
 export default function (state = defaultCart, action) {
-  let newState = state
-
+  let newState = {...state}
+  console.log('current state', state)
   switch (action.type) {
     case ADD_ITEM_TO_CART:
-      newState = [...newState, action.item]
+      if (!newState[action.item.id]) {
+          newState[action.item.id] = 1
+      } else {
+        newState[action.item.id]++
+      }
       return newState
     default:
       return state
@@ -33,6 +37,19 @@ export const putItemInCart = (item, user) => {
       axios.post(`api/cartItems`, obj)
         .then(res => res.data)
         .catch(console.error)
+    } else {
+      if (!window.localStorage.getItem('cartItems')) {
+        const items = {[item.id]: 1}
+        window.localStorage.setItem('cartItems', JSON.stringify(items))
+      } else {
+        const items = JSON.parse(window.localStorage.getItem('cartItems'))
+        if (items[item.id]) {
+          items[item.id]++
+        } else {
+          items[item.id] = 1
+          window.localStorage.setItem('cartItems', JSON.stringify(items))
+        }
+      }
     }
     dispatch(addItemToCart(item))
   }
