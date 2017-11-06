@@ -7,11 +7,11 @@ import { addToCart } from '../store'
  * COMPONENT
  */
 export const SingleProductPage = (props) => {
-   
-    const id = props.match.params.itemsId,
-        targetItem = props.items.find(item => item.id === +id);
 
-    if (!targetItem) return <div>Loading...</div>;
+	const id = props.match.params.itemsId,
+		targetItem = props.items.find(item => item.id === +id);
+
+	if (!targetItem) return <div>Loading...</div>;
 
 	const { name, picture, price, stock, description } = targetItem;
 
@@ -55,13 +55,13 @@ const mapState = (state) => {
 	}
 }
 const mapDispatch = (dispatch) => {
-    return {
-        handleSubmit: (event) => {
-            event.preventDefault();
-            dispatch(addToCart(event.target.value));
-        },
+	return {
+		handleSubmit: (event) => {
+			event.preventDefault();
+			dispatch(addToCart(event.target.value));
+		},
 
-    }
+	}
 }
 
 export default connect(mapState, mapDispatch)(SingleProductPage);

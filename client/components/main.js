@@ -25,12 +25,16 @@ class Main extends Component {
               ? <div>
                 {/* The navbar will show these links after you log in */}
                 <Link to="/home">Home</Link>
+                <Link to="/product-list">View All Products</Link>
+                <Link to="/cart"><img className="cart" src="../../images/rockB.png" /></Link>
                 <a href="#" onClick={handleClick}>Logout</a>
               </div>
               : <div>
                 {/* The navbar will show these links before you log in */}
                 <Link to="/login">Login</Link>
                 <Link to="/signup">Sign Up</Link>
+                <Link to="/product-list">View All Products</Link>
+                <Link to="/cart"><img className="cart" src="../../images/rockB.png" /></Link>
               </div>
           }
         </nav>

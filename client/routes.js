@@ -1,10 +1,11 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {Router} from 'react-router'
-import {Route, Switch} from 'react-router-dom'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Router } from 'react-router'
+import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 import {Main, Login, Signup, UserHome, SingleProductPage, ProductList, OrderList, AddItem, AdminItemEdit, AdminItemList, OrderItem, OrderItemEdit} from './components'
+
 import { me, fetchItems, fetchOrders, fetchCategories } from './store'
 
 /**
@@ -12,12 +13,12 @@ import { me, fetchItems, fetchOrders, fetchCategories } from './store'
  */
 class Routes extends Component {
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.loadInitialData()
   }
 
-  render () {
-    const {isLoggedIn} = this.props
+  render() {
+    const { isLoggedIn } = this.props
     return (
       <Router history={history}>
         <Main>
@@ -27,18 +28,22 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/product-list/:itemsId" component={SingleProductPage} />
             <Route path="/product-list" component={ProductList} />
+            <Route path="/cart" component={Cart} />
             <Route exact path="/admin-list/" component={AdminItemList} />
             <Route path="/admin-list/:itemsId" component={AdminItemEdit} />
             <Route path="/order-list/edit/:orderId" component={OrderItemEdit} />
             <Route path="/order-list/:orderId" component={OrderItem} />
             <Route exact path="/order-list" component={OrderList} />
             <Route path="/add-item" component={AddItem} />
+
             {
               isLoggedIn &&
-                <Switch>
-                  {/* Routes placed here are only available after logging in */}
-                  <Route path="/home" component={UserHome} />
-                </Switch>
+              <Switch>
+                {/* Routes placed here are only available after logging in */}
+                <Route path="/order-list" component={OrderList} />
+                <Route path="/cart" component={Cart} />
+                <Route path="/home" component={UserHome} />
+              </Switch>
             }
             {/* Displays our Login component as a fallback */}
             <Route component={Login} />
@@ -62,7 +67,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadInitialData () {
+    loadInitialData() {
       dispatch(me())
       dispatch(fetchItems())
       dispatch(fetchOrders())
