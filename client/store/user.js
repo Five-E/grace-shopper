@@ -34,20 +34,18 @@ export const auth = (email, password, method) =>
   dispatch =>
     axios.post(`/auth/${method}`, { email, password })
       .then(res => {
-        dispatch(getUser(res.data))
         if (res.data) {
           dispatch(clearCart())
           const localCart = JSON.parse(window.localStorage.getItem('cartItems'))
           for (let itemId in localCart) {
             if (localCart.hasOwnProperty(itemId)) {
-              console.log('The rock says this should be what be in the cart', localCart[itemId])
               const item = {id: itemId, quantity: localCart[itemId]}
-              console.log("RESULTS>DATA",res.data)
-              dispatch(putItemInCart(item, res.data.user))
+              dispatch(putItemInCart(item, res.data))
               window.localStorage.clear()
             }
           }
         }
+        dispatch(getUser(res.data))
         history.push('/home')
       })
       .catch(error =>

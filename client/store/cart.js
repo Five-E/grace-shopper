@@ -35,6 +35,7 @@ export default function (state = defaultCart, action) {
 
 /* ------------   THUNK CREATORs     ------------------ */
 export const putItemInCart = (item, user) => {
+  console.log("ITEM:IN PUTITEMINCART:::", item, "USER",user)
   const obj = {itemId: item.id,
                userId: user.id,
                quantity: item.quantity || 1 }
@@ -42,6 +43,7 @@ export const putItemInCart = (item, user) => {
     if (user.id) {
       axios.post(`api/cartItems`, obj)
         .then(res => res.data)
+        .then(_ => dispatch(addItemToCart(item)))
         .catch(console.error)
     } else {
       if (!window.localStorage.getItem('cartItems')) {
@@ -56,7 +58,7 @@ export const putItemInCart = (item, user) => {
         }
         window.localStorage.setItem('cartItems', JSON.stringify(items))
       }
+      dispatch(addItemToCart(item))
     }
-    dispatch(addItemToCart(item))
   }
 }

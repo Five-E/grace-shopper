@@ -9,8 +9,16 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  CartItem.create(req.body)
-    .then(item => res.json(item))
+  CartItem.findOrCreate({ where: {userId: req.body.userId, itemId: req.body.itemId} })
+    .spread((item, wasCreated) => {
+      if (!wasCreated) {
+        item.update({quantity: item.quantity + 1})
+          .then(updatedItem => res.json(updatedItem))
+      } else {
+        item.update({quantity: req.body.quantity})
+          .then(newItem => res.json(newItem))
+      }
+    })
     .catch(next)
 })
 
