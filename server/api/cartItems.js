@@ -10,9 +10,7 @@ router.get('/', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   CartItem.create(req.body)
-    .then(item => {
-      res.json(item)
-    })
+    .then(item => res.json(item))
     .catch(next)
 })
 

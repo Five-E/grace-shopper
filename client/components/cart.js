@@ -17,17 +17,18 @@ class Cart extends Component {
   }
 
   render() {
+    console.log(window.localStorage, '!!!!!!!!!!!!!!')
     return (
       <div>
         <h1>This Person's Cart</h1>
         {
-          this.props.cart.map((item) => {
-            const targetItem = this.props.items.find(inventory => item.id === inventory.id)
+          Object.keys(this.props.cart).map((itemId) => {
+            const targetItem = this.props.items.find(inventory => parseInt(itemId, 10) === inventory.id)
             return (
-              <div key={item.id}>
-                <img src={item.picture} />
-                <p>{item.name}</p>
-                <p>${item.price}</p>
+              <div key={targetItem.id}>
+                <img src={targetItem.picture} />
+                <p>{targetItem.name}</p>
+                <p>${targetItem.price}</p>
                 <select>
                   {
                     this.quantityDropdown(targetItem.stock)
