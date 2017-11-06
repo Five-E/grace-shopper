@@ -1,34 +1,41 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const OrderList = (props) => {
-
   const orders = props.orders
+
+  if(!orders) return (<div id="warning"> The Rock can't cook up orders because we don't have any orders to cook. Get some people to buy rocks. </div>)
 
   return (
     <div>
       <h3>Orders List Page</h3>
       {
-        orders ? orders.map(order => {
+        orders.map(order => {
           return (
-            <div id="order-box" style={{margin: '10px', padding: '15px', border: 'solid 1px black'}} key={order.id}>
-              <span style={{fontWeight: 'bold', display: 'block'}}>order id</span>
+            <Link key={order.id} to={`/order-list/${order.id}`}><div id="order-box" style={{margin: '10px', padding: '15px', border: 'solid 1px black'}} >
+              <span style={{fontWeight: 'bold', paddingLeft: '15px', paddingRight: '5px'}}>order id</span>
               {order.id}
-              <span style={{fontWeight: 'bold', display: 'block'}}>order by</span>
+              <span style={{fontWeight: 'bold', paddingLeft: '15px', paddingRight: '5px'}}>order by</span>
               {order.user.name}
-              <span style={{fontWeight: 'bold', display: 'block'}}>order date</span>
+              <span style={{fontWeight: 'bold', paddingLeft: '15px', paddingRight: '5px'}}>order date</span>
               {order.createdAt}
-              <span style={{fontWeight: 'bold', display: 'block'}}>order total paid</span>
+              <span style={{fontWeight: 'bold', paddingLeft: '15px', paddingRight: '5px'}}>order total paid</span>
               {order.totalPrice}
-              <span style={{fontWeight: 'bold', display: 'block'}}>order item count</span>
+              <span style={{fontWeight: 'bold', paddingLeft: '15px', paddingRight: '5px'}}>order item count</span>
               {order.itemQuantity}
-            </div>
+            </div></Link>
           )
-        }) : (<div id="warning">
-        The Rock can't cook up orders because we don't have any orders to cook. Get some people to buy rocks.
-        </div>)
+        })
       }
     </div>
   )
 }
 
-export default OrderList
+const mapState = (state) => {
+  return {
+    orders: state.orders
+  }
+}
+
+export default connect(mapState)(OrderList)
