@@ -3,12 +3,13 @@ import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import user from './user'
-import items from './item';
-import orders from './orders';
-import categories from './category';
-import selectedCategory from './selectedCategory';
+import items from './item'
+import orders from './orders'
+import categories from './category'
+import selectedCategory from './selectedCategory'
+import itemCategories from './itemCategories'
 
-const reducer = combineReducers({user, items, orders, categories, selectedCategory})
+const reducer = combineReducers({user, items, orders, categories, selectedCategory, itemCategories})
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({collapsed: true})
@@ -22,3 +23,4 @@ export * from './item'
 export * from './orders'
 export * from './category'
 export * from './selectedCategory'
+export * from './itemCategories'

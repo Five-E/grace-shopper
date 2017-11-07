@@ -1,11 +1,17 @@
 const router = require('express').Router()
-const {Item} = require('../db/models')
+const {Item, Category } = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
   Item.findAll()
     .then(items => res.json(items))
     .catch(next)
+})
+
+router.get('/:itemId', (req, res, next) => {
+  Item.findById(req.params.itemId)
+  .then(item => res.json(item))
+  .catch(next)
 })
 
 router.post('/', (req, res, next) => {
@@ -18,13 +24,8 @@ router.post('/', (req, res, next) => {
 
 router.put('/:itemId', (req, res, next) => {
   const itemId = req.params.itemId;
-
-  const itemCategories = req.body.categories || []
-  delete req.body.categories
-
   Item.update(req.body, {where: {id: itemId}, returning: true})
     .then((updatedItem) => {
-      if (itemCategories.length) updatedItem.setCategories(itemCategories)
       return res.json(updatedItem)
     })
     .catch(next)
@@ -35,5 +36,26 @@ router.delete('/:itemId', (req, res, next) => {
   .then((result) => {
     res.json(result)
   })
+  .catch(next)
+})
+
+router.put('/:itemId/categories', (req, res, next) => {
+  Item.findById(req.params.itemId)
+  .then(item => {
+    return item.addCategory(req.body.id)})
+  .then(() => {
+    return Category.findById(req.body.id)
+  })
+  .then((result) => res.json(result))
+  .catch(next)
+})
+
+router.delete('/:itemId/categories', (req, res, next) => {
+  Item.findById(req.params.itemId)
+  .then(item => {
+    return item.removeCategory(+req.body.id)
+  })
+  .then(result => {
+    res.json(result)})
   .catch(next)
 })

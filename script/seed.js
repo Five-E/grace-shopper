@@ -269,8 +269,6 @@ const createItems = () => {
   return Promise.all(itemData.map(item => {
     return Item.create(item)
     .then(createdItem => createdItem.setCategories([Math.ceil(Math.random() * 3), Math.ceil(Math.random() * 4) + 3]))
-    // .then(createdItem => createdItem.setCategories([1, 4]))
-    
   }))
 };
 
