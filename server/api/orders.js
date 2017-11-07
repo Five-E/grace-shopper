@@ -10,6 +10,15 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
+router.post('/', (req, res, next) => {
+  const {order, purchasedItems} = req.body
+  console.log(req.body)
+  Order.create(req.body)
+    .then(createdOrd => res.json(createdOrd))
+    .catch(next)
+  
+})
+
 router.put('/:orderId', mustBeAdmin, (req, res, next) => {
   const orderId = +req.params.orderId;
   Order.update(req.body, { where: { id: orderId }, returning: true })

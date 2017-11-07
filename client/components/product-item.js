@@ -44,14 +44,12 @@ export const ProductItem = (props) => {
 							props.addToCart(props.itemInfo, props.user) 
 							const updatedQuantity = props.quantityInCart || 1
 							if (updatedQuantity+1 > stock) {
-								e.target.HTML = 'No more stock'
 								buttonStatus = true
 							}
 						} else {
-							e.target.HTML = 'No more stock'
 							buttonStatus = true
 						}
-					}} className="btn btn-info btn-xs" style={divStyle}>{buttonStatus ? 'No more units in stock' : 'Add to Cart'}</button>
+					}} className="btn btn-info btn-xs" style={divStyle}>{buttonStatus ? 'No more rock... in stock' : 'Add to Cart'}</button> {props.quantityInCart >= 1 && `${props.quantityInCart} in cart`}
 				</div>
 			</div>
 		</div>
@@ -60,8 +58,7 @@ export const ProductItem = (props) => {
 
 const mapState = (state) => {
 	return {
-		user: state.user,
-		cart: state.cart
+		user: state.user
 	}
 }
 

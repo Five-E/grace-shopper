@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import { Link } from 'react-router-dom'
 import {putItemInCart, deleteCartItem} from '../store'
 
 class Cart extends Component {
@@ -59,6 +60,9 @@ class Cart extends Component {
             )
           }
         })}
+        <div>
+          <Link className="btn btn-success btn-xl" to="/checkout">Checkout</Link>
+        </div>
       </div>
     )
   }

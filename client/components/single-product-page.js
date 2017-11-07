@@ -50,7 +50,7 @@ export const SingleProductPage = (props) => {
 						} else {
 							buttonStatus = true
 						}
-					}} className="btn btn-info btn-xs" style={divStyle}>{buttonStatus ? 'No more units in stock' : 'Add to Cart'}</button> {props.cart[id] >= 1 && `${props.cart[id]} in cart` }
+					}} className="btn btn-info btn-xs" style={divStyle}>{buttonStatus ? 'No more rock... in stock' : 'Add to Cart'}</button> {props.cart[id] >= 1 && `${props.cart[id]} in cart` }
 
 			<button><NavLink to={`/product-list`}>Return to List</NavLink></button>
 

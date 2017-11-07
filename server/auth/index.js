@@ -38,6 +38,18 @@ router.post('/signup', mustHavePassword, (req, res, next) => {
     })
 })
 
+router.post('/guest', mustHavePassword, (req, res, next) => {
+  const lookupUser = {
+    email: req.body.email
+  }
+  User.findOrCreate({ where: lookupUser})
+    .spread((user, wasCreated) => {
+      return user.update(req.body)
+    })
+    .then(updatedUser => res.json(updatedUser))
+    .catch(next)
+})
+
 router.post('/logout', (req, res) => {
   req.logout()
   res.redirect('/')
