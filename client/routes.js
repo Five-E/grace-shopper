@@ -60,13 +60,14 @@ class Routes extends Component {
  */
 const mapState = (state) => {
   return {
+    user: state.user,
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id
   }
 }
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, ownProps) => {
   return {
     loadInitialData() {
       dispatch(me())

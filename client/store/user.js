@@ -1,6 +1,6 @@
 import axios from 'axios'
 import history from '../history'
-import {putItemInCart, clearCart } from './cart'
+import {putItemInCart, clearCart, initializeCartState } from './cart'
 
 /**
  * ACTION TYPES
@@ -27,6 +27,7 @@ export const me = () =>
     axios.get('/auth/me')
       .then(res => {
         dispatch(getUser(res.data || defaultUser))
+        dispatch(initializeCartState(res.data || defaultUser))
       })
       .catch(err => console.log(err))
 
@@ -45,6 +46,7 @@ export const auth = (email, password, method) =>
             }
           }
         }
+        dispatch(initializeCartState(res.data || defaultUser))
         dispatch(getUser(res.data))
         history.push('/home')
       })
@@ -56,6 +58,7 @@ export const logout = () =>
     axios.post('/auth/logout')
       .then(_ => {
         dispatch(removeUser())
+        dispatch(clearCart())
         history.push('/login')
       })
       .catch(err => console.log(err))
