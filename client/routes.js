@@ -68,7 +68,6 @@ const mapState = (state) => {
 }
 
 const mapDispatch = (dispatch, ownProps) => {
-  console.log("own props",ownProps)
   return {
     loadInitialData() {
       dispatch(me())

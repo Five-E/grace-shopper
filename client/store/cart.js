@@ -2,36 +2,35 @@
 import axios from 'axios'
 
 /* -----------------    INITIAL STATE ------------------ */
-const defaultCart = {
-  initialized: false
-}
+const defaultCart = {}
 
 /* -----------------    ACTION TYPES ------------------ */
 const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART'
 const CLEAR_CART = 'CLEAR_CART'
 const INITIALIZE_CART = 'INITIALIZE_CART'
+const REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART'
 
 /* ------------   ACTION CREATORS     ------------------ */
 export const addItemToCart = item => ({ type: ADD_ITEM_TO_CART, item })
 export const clearCart = () => ({ type: CLEAR_CART })
 export const initializeCart = () => ({ type: INITIALIZE_CART })
+export const removeItemFromCart = (item) => ({ type: REMOVE_ITEM_FROM_CART, item })
 
 /* ------------       REDUCER     ------------------ */
 export default function (state = defaultCart, action) {
   let newState = {...state}
   switch (action.type) {
-    case INITIALIZE_CART:
-      newState.initialized = true
+    case REMOVE_ITEM_FROM_CART:
+      delete newState[action.item.id]
       return newState
     case CLEAR_CART:
       return defaultCart
     case ADD_ITEM_TO_CART:
       if (!newState[action.item.id]) {
-          newState[action.item.id] = action.item.quantity || 1
+        newState[action.item.id] = action.item.quantity || 1
       } else {
-        newState[action.item.id]++
+        newState[action.item.id] = action.item.quantity || newState[action.item.id] + 1
       }
-      console.log('current state', newState)
       return newState
     default:
       return state
@@ -40,8 +39,6 @@ export default function (state = defaultCart, action) {
 
 /* ------------   THUNK CREATORs     ------------------ */
 export const initializeCartState = (user) => {
-  console.log("USER PASSED IN ============>", user )
-  console.log("!!user-->",!user)
   return function thunk (dispatch) {
     if (Object.keys(user).length === 0) {
       const localStoreCart = window.localStorage.getItem('cartItems')
@@ -56,13 +53,10 @@ export const initializeCartState = (user) => {
         })
       }
     } else {
-      console.log("USER-------------> ", user)
-      console.log("******************");
-      axios.get(`api/cartItems/${user.id}`)
+      axios.get(`/api/cartItems/${user.id}`)
         .then(res => res.data)
         .then(items => {
-          console.log("--------")
-          items.forEach(item => {
+          return items.length && items.map(item => {
             const itemObj = {
               id: item.itemId,
               quantity: item.quantity
@@ -75,16 +69,43 @@ export const initializeCartState = (user) => {
   }
 }
 
+export const deleteCartItem = (item, user) => {
+  return function thunk (dispatch) {
+    if(user.id) {
+      axios.delete(`/api/cartItems/${user.id}/${item.id}`)
+      .then(res => res.data)
+      .then(status => {
+        if (status === 'dropped by the rock') {
+          dispatch(removeItemFromCart(item))
+        }
+      })
+    } else {
+      const items = JSON.parse(window.localStorage.getItem('cartItems'))
+      delete items[item.id]
+      window.localStorage.setItem('cartItems', JSON.stringify(items))
+      dispatch(removeItemFromCart(item))
+    }
+  }
+}
+
 export const putItemInCart = (item, user) => {
-  console.log("ITEM:IN PUTITEMINCART:::", item, "USER",user)
-  const itemObj = {itemId: item.id,
-               userId: user.id,
-               quantity: item.quantity || 1 }
+  
   return function thunk (dispatch) {
     if (user.id) {
-      axios.post(`api/cartItems`, itemObj)
+      const itemObj = {
+        itemId: item.id,
+        userId: user.id,
+        quantity: item.quantity || 1
+      }
+      axios.post(`/api/cartItems`, itemObj)
         .then(res => res.data)
-        .then(_ => dispatch(addItemToCart(item)))
+        .then(cartItem => {
+          const itemObj = {
+            id: cartItem.itemId,
+            quantity: cartItem.quantity
+          }
+          dispatch(addItemToCart(itemObj))
+        })
         .catch(console.error)
     } else {
       if (!window.localStorage.getItem('cartItems')) {
