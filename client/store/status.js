@@ -4,7 +4,7 @@ import axios from 'axios'
 const defaultUsers = []
 
 /* -----------------    ACTION TYPES ------------------ */
-const STATUSES_FETCHED = 'USERS_FETCHED'
+const STATUSES_FETCHED = 'STATUSES_FETCHED'
 
 
 /* ------------   ACTION CREATORS     ------------------ */
@@ -18,7 +18,6 @@ export default function (state = defaultUsers, action) {
     case STATUSES_FETCHED:
       newState = action.statuses
       return newState
-
     default:
       return state
   }
@@ -29,10 +28,10 @@ export const fetchStatuses = () => {
   return function thunk(dispatch) {
     axios.get('/api/status')
       .then(res => {
-        const users = res.data;
-        dispatch(statusesFetched(users));
+        const statuses = res.data;
+        dispatch(statusesFetched(statuses));
       })
-      .catch(() => console.log('Fetching users unsuccessful'));
+      .catch(() => console.log('Fetching status unsuccessful'));
   }
 }
 

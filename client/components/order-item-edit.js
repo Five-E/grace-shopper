@@ -1,9 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { updateOrder } from '../store'
 
 class OrderItemEdit extends Component {
+  constructor(props) {
+    super(props)
+    this.submitHandler = this.submitHandler.bind(this)
+  }
 
+  submitHandler(event) {
+    event.preventDefault()
+    const updatedOrder = { id: this.props.match.params.orderId }
+    if (event.target.status.value) updatedOrder.statusName = event.target.status.value
+
+    this.props.update(updatedOrder)
+  }
   render() {
     if (!this.props.orders) {
       return <div>Loading>... </div>
@@ -12,7 +24,9 @@ class OrderItemEdit extends Component {
       return checking.id === +this.props.match.params.orderId
     })
     if (!order) return <div>invalid order id</div>
-    console.log(order)
+
+    const { statuses } = this.props;
+
     return (
       <div>
         <Link to={`/order-list/${order.id}`}>View This Order</Link> | <Link to={`/order-list/`}>View All Orders</Link>
@@ -28,31 +42,33 @@ class OrderItemEdit extends Component {
         <form id="form" onSubmit={this.submitHandler}>
           <div>
             <label> Status </label>
-            <select name="isAdmin" className="form-control">
+            <select name="status" className="form-control">
               <option value=""></option>
-              <option value={true}>Is Admin</option>
-              <option value={false}>Is Not An Admin</option>
+              {
+                statuses.map(status => <option key={status.name}>{status.name}</option>)
+              }
             </select>
           </div>
-          <button type="submit" className="btn btn-primary">Submit</button>
+          <button type="submit" className="btn btn-primary">Change</button>
         </form>
-
       </div>)
 
   }
 }
 
 const mapState = (state) => {
-
   return {
     isLoggedIn: !!state.user.id,
-    orders: state.orders
+    orders: state.orders,
+    statuses: state.statuses
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-
+    update: function (updatedOrder) {
+      dispatch(updateOrder(updatedOrder))
+    }
   }
 }
 

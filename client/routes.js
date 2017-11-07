@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import history from './history'
 import {Main, Cart, Login, Signup, UserHome, SingleProductPage, ProductList, OrderList, AddItem, AdminItemEdit, AdminItemList, OrderItem, OrderItemEdit, AdminUserEdit, AdminUserList} from './components'
 
-import { me, fetchItems, fetchOrders, fetchCategories, fetchUsers } from './store'
+import { me, fetchItems, fetchOrders, fetchCategories, fetchUsers, fetchStatuses } from './store'
 
 /**
  * COMPONENT
@@ -74,6 +74,7 @@ const mapDispatch = (dispatch) => {
       dispatch(fetchOrders())
       dispatch(fetchCategories())
       dispatch(fetchUsers())
+      dispatch(fetchStatuses())
     }
   }
 }

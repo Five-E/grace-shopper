@@ -5,9 +5,11 @@ const defaultOrders = []
 
 /* -----------------    ACTION TYPES ------------------ */
 const ORDERS_FETCHED = 'ORDERS_FETCHED'
+const ORDER_UPDATED = 'ORDER_UPDATED'
 
 /* ------------   ACTION CREATORS     ------------------ */
 const ordersFetched = orders => ({type: ORDERS_FETCHED, orders})
+const orderUpdated = order => ({type: ORDER_UPDATED, order})
 
 /* ------------       REDUCER     ------------------ */
 export default function (state = defaultOrders, action) {
@@ -16,6 +18,14 @@ export default function (state = defaultOrders, action) {
   switch (action.type) {
     case ORDERS_FETCHED:
       newState = action.orders
+      return newState
+    case ORDER_UPDATED:
+      newState = newState.slice()
+      newState.forEach((order) => {
+        if (order.id === action.order.id) {
+          order.statusName = action.order.statusName
+        }
+      })
       return newState
     default:
       return state
@@ -31,6 +41,17 @@ export const fetchOrders = () => {
       dispatch(ordersFetched(orders))
     })
     .catch(() => console.log('Fetching orders unsuccessful'))
+  }
+}
+
+export const updateOrder = (order) => {
+  return function thunk(dispatch) {
+    axios.put(`/api/orders/${order.id}`, order)
+    .then(res => res.data)
+    .then(updatedOrder => {
+      dispatch(orderUpdated(updatedOrder))
+    })
+    .catch(() => console.log('Updating an order unsuccessful'))
   }
 }
 
