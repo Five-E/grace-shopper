@@ -16,7 +16,6 @@ describe('Orders List Component', () => {
     beforeEach(() => {
       orderList = shallow(<OrderList orders={[]} />)
     })
-  
     it('Should show no orders if empty array is passed in', () => {
       expect(orderList.find('div>div').length).to.be.equal(0)
     })
@@ -32,7 +31,7 @@ describe('Orders List Component', () => {
         itemQuantity: 1
       }]} />)
     })
-  
+
     it('Should show orders if array of order objects is passed in', () => {
       const lookInside = orderList.find('div>div')
       expect(lookInside.length).to.be.equal(1)
@@ -40,5 +39,4 @@ describe('Orders List Component', () => {
       expect(lookInside.text()).to.include('$1')
     })
   })
-  
 })
