@@ -28,6 +28,7 @@ class Main extends Component {
                 <Link to="/product-list">View All Products</Link>
                 <Link to="/cart"><img className="cart" src="../../images/rockB.png" /></Link>
                 <a href="#" onClick={handleClick}>Logout</a>
+                <Link to="/my-orders" >My Orders</Link>
               </div>
               : <div>
                 {/* The navbar will show these links before you log in */}
@@ -35,7 +36,7 @@ class Main extends Component {
                 <Link to="/signup">Sign Up</Link>
                 <Link to="/product-list">View All Products</Link>
                 <Link to="/cart"><img className="cart" src="../../images/rockB.png" /></Link>
-              </div>
+                </div>
           }
         </nav>
         <hr />

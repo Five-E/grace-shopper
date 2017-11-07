@@ -4,7 +4,7 @@ import { Router } from 'react-router'
 import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Cart, Login, Signup, UserHome, SingleProductPage, ProductList, OrderList, AddItem, AdminItemEdit, AdminItemList, OrderItem, OrderItemEdit, AdminUserEdit, AdminUserList} from './components'
+import {Main, Cart, Login, Signup, UserHome, SingleProductPage, ProductList, OrderList, AddItem, AdminItemEdit, AdminItemList, OrderItem, OrderItemEdit, AdminUserEdit, AdminUserList, UserOrders} from './components'
 
 import { me, fetchItems, fetchOrders, fetchCategories, fetchUsers, fetchStatuses } from './store'
 
@@ -40,10 +40,11 @@ class Routes extends Component {
             {
               isLoggedIn &&
               <Switch>
-                {/* Routes placed here are only available after logging in */}
-                <Route path="/order-list" component={OrderList} />
-                <Route path="/cart" component={Cart} />
-                <Route path="/home" component={UserHome} />
+              {/* Routes placed here are only available after logging in */}
+              <Route path="/order-list" component={OrderList} />
+              <Route path="/cart" component={Cart} />
+              <Route path="/home" component={UserHome} />
+              <Route exact path="/my-orders" component={UserOrders} />
               </Switch>
             }
             {/* Displays our Login component as a fallback */}
