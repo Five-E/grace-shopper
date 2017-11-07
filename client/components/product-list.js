@@ -53,7 +53,7 @@ class ProductList extends React.Component {
               items.map(item => {
                 return (
                   <div key={item.id}>
-                    <ProductItem user={this.props.user} addToCart={this.props.addToCart} itemInfo={item} />
+                    <ProductItem quantityInCart={this.props.cart[item.id]} user={this.props.user} addToCart={this.props.addToCart} itemInfo={item} />
                   </div>
                 )
               })
@@ -70,6 +70,7 @@ const mapState = (state) => {
   return {
     items: state.items,
     user: state.user,
+    cart: state.cart,
     categoryId: state.selectedCategory
   }
 }
