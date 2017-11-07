@@ -18,8 +18,15 @@ router.post('/', (req, res, next) => {
 
 router.put('/:itemId', (req, res, next) => {
   const itemId = req.params.itemId;
+
+  const itemCategories = req.body.categories || []
+  delete req.body.categories
+
   Item.update(req.body, {where: {id: itemId}, returning: true})
-    .then((item) => res.json(item))
+    .then((updatedItem) => {
+      if (itemCategories.length) updatedItem.setCategories(itemCategories)
+      return res.json(updatedItem)
+    })
     .catch(next)
 })
 

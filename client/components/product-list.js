@@ -14,11 +14,6 @@ class ProductList extends React.Component{
       localitems: []
     }
     this.handleChange = this.handleChange.bind(this);
-    this.filterItemsByCategory = this.filterItemsByCategory.bind(this);
-  }
-
-  filterItemsByCategory(item) {
-    return item.categoryId === this.state.categoryId
   }
 
   handleChange(event) {
@@ -28,14 +23,11 @@ class ProductList extends React.Component{
 
 
   render() {
-    console.log('in product-list component, local state: ', this.state)
-    console.log('props', this.props)
     const inputValue = this.state.inputValue
     const inputRegEx = new RegExp(this.state.inputValue, 'i');
-    // const items = this.props.items.filter(this.filterItemsByCategory).filter(item => item.name.match(inputValue));
     let items = this.props.items;
     if (this.props.categoryId) {
-      items = items.filter(item => item.categoryId === this.props.categoryId)
+      items = items.filter(item => !!item.categories.find(category => category.id === this.props.categoryId))
     }
     items = items.filter(item => item.name.match(inputRegEx))
     return (
@@ -49,7 +41,7 @@ class ProductList extends React.Component{
       />
         <div className="row">
           {
-           items.map(item => {
+           items && items.map(item => {
               return (
                 <div key={item.id}>
                   <ProductItem itemInfo={item} />
@@ -66,7 +58,6 @@ class ProductList extends React.Component{
 
 
 const mapState = (state) => {
-  console.log('in product-list component, state: ', state)
   return {
     items: state.items,
     categoryId: state.selectedCategory

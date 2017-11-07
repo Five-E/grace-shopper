@@ -10,6 +10,10 @@ const Category = db.define('category', {
 		type: Sequelize.STRING,
 		defaultValue: '/images/defaultCategory.jpg'
 	}
+}, {
+	scopes: {
+		include: [{all: true, nested: true}]
+	}
 })
 
 module.exports = Category

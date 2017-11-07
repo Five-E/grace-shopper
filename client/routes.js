@@ -4,7 +4,7 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, SingleProductPage, ProductList, OrderList, AddItem, AdminItemEdit, AdminItemList} from './components'
+import {Main, Login, Signup, UserHome, SingleProductPage, ProductList, OrderList, AddItem, AdminHome, AdminItemEdit, AdminItemList, AdminCategoryList, AdminCategoryAdd, AdminCategoryEdit} from './components'
 import { me, fetchItems, fetchOrders, fetchCategories } from './store'
 
 /**
@@ -27,8 +27,13 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/product-list/:itemsId" component={SingleProductPage} />
             <Route path="/product-list" component={ProductList} />
-            <Route exact path="/admin-list/" component={AdminItemList} />
-            <Route path="/admin-list/:itemsId" component={AdminItemEdit} />
+            <Route exact path="/admin-home" component={AdminHome} />
+            <Route exact path="/admin-item-list" component={AdminItemList} />
+            <Route exact path="/admin-category-list" component={AdminCategoryList} />
+            <Route exact path="/admin-category-add" component={AdminCategoryAdd} />
+            {/*<Route path="/admin-item-list/:itemsId" render={props => <AdminItemEdit {...props} catagoriesOfItem={} />} />*/}
+            <Route path="/admin-item-list/:itemsId" component={AdminItemEdit} />
+            <Route path="/admin-category-list/:categoryId" component={AdminCategoryEdit} />
             <Route path="/order-list" render={
               () => {
                 return (<OrderList orders={this.props.orders} />)
