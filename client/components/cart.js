@@ -13,20 +13,30 @@ class Cart extends Component {
       options.push(i)
     }
     return options.map(idx => <option key={idx}>{idx}</option>)
+  }
+
+  cartList() {
 
   }
 
   render() {
     console.log(window.localStorage, '!!!!!!!!!!!!!!')
+    if (!this.props.items) return <div> Sorry no items</div>
     return (
       <div>
         <h1>This Person's Cart</h1>
-        {
-          Object.keys(this.props.cart).map((itemId) => {
-            const targetItem = this.props.items.find(inventory => parseInt(itemId, 10) === inventory.id)
+        {Object.keys(this.props.cart).map((itemId) => {
+          if (this.props.cart.hasOwnProperty(itemId) && itemId !== 'initialized' ) {
+            itemId = parseInt(itemId)
+            console.log("items==>",this.props.items)
+            console.log("item here-->",itemId,"| has own prop--> ",this.props.cart.hasOwnProperty(itemId))
+            const targetItem = this.props.items.find(inventory => itemId === inventory.id)
+            console.log("targetItem -->", targetItem)
+            console.log("cart props -->", this.props.cart)
+            if (!targetItem) return <div>Item not found</div>
             return (
               <div key={targetItem.id}>
-                <img src={targetItem.picture} />
+                <img height="100px" src={targetItem.picture} />
                 <p>{targetItem.name}</p>
                 <p>${targetItem.price}</p>
                 <select>
@@ -36,10 +46,9 @@ class Cart extends Component {
                 </select>
               </div>
             )
-          })
-        }
+          }
+        })}
       </div>
-
     )
   }
 }
