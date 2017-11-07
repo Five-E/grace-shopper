@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
+const { mustBeAdmin } = require('./auth-util')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -13,14 +14,14 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
-router.put('/:userId', (req, res, next) => {
+router.put('/:userId', mustBeAdmin, (req, res, next) => {
   const userId = req.params.userId;
   User.update(req.body, {where: {id: userId}, returning: true})
     .then((item) => res.json(item))
     .catch(next)
 })
 
-router.delete('/:userId', (req, res, next) => {
+router.delete('/:userId', mustBeAdmin, (req, res, next) => {
   User.destroy({where: {id: req.params.userId}, returning: true})
   .then((result) => {
     res.json(result)
