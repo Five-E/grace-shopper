@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ProductItem } from './product-item'
-import { putItemInCart  } from '../store'
+import { putItemInCart } from '../store'
 import Sidebar from './sidebar'
 import FilterInput from './filter-input'
 
 
-class ProductList extends React.Component{
+class ProductList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +25,7 @@ class ProductList extends React.Component{
 
   handleChange(event) {
     const inputValue = event.target.value;
-    this.setState({inputValue});
+    this.setState({ inputValue });
   }
 
 
@@ -38,27 +38,28 @@ class ProductList extends React.Component{
       items = items.filter(item => item.categoryId === this.props.categoryId)
     }
     items = items.filter(item => item.name.match(inputRegEx))
+
     return (
       <div className="wrapper">
         <Sidebar />
         <div className="content">
-        <h3>Product List Page</h3>
-        <FilterInput
-        handleChange={this.handleChange}
-        inputValue={inputValue}
-      />
-        <div className="row">
-          {
-           items.map(item => {
-              return (
-                <div key={item.id}>
-                  <ProductItem user={this.props.user} addToCart={this.props.addToCart} itemInfo={item} />
-                </div>
-              )
-            })
-          }
+          <h3>Product List Page</h3>
+          <FilterInput
+            handleChange={this.handleChange}
+            inputValue={inputValue}
+          />
+          <div className="row">
+            {
+              items.map(item => {
+                return (
+                  <div key={item.id}>
+                    <ProductItem user={this.props.user} addToCart={this.props.addToCart} itemInfo={item} />
+                  </div>
+                )
+              })
+            }
+          </div>
         </div>
-      </div>
       </div>
     )
   }
@@ -66,17 +67,19 @@ class ProductList extends React.Component{
 
 
 const mapState = (state) => {
-  return { items: state.items,
-           user: state.user,
-         categoryId: state.selectedCategory}
+  return {
+    items: state.items,
+    user: state.user,
+    categoryId: state.selectedCategory
+  }
 }
 
 const mapDispatch = (dispatch) => {
-	return {
-		addToCart (item, user) {
-			dispatch(putItemInCart(item, user))
-		}
-	}
+  return {
+    addToCart(item, user) {
+      dispatch(putItemInCart(item, user))
+    }
+  }
 }
 
 export default connect(mapState, mapDispatch)(ProductList)

@@ -24,6 +24,9 @@ export const ProductItem = (props) => {
 					<p>{description}</p>
 					<p>Price: ${price}</p>
 					<a onClick={() => { props.addToCart(props.itemInfo, props.user) }} className="btn btn-info btn-xs" role="button">Add to Cart</a>
+					<p>RATING_PLACE_HOLDER</p>
+					{/* TODO: Conditionally render the rating button if user is logged in. */}
+					<NavLink to={`/product-rating/${id}`} className="btn btn-info btn-xs" role="button">Rate this Product</NavLink>
 				</div>
 			</div>
 		</div>

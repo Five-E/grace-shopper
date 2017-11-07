@@ -40,7 +40,7 @@ export const SingleProductPage = (props) => {
 
 function quantityDropdown(stock) {
 	let options = [];
-	for (let i = 1; i < stock + 1; i++) {
+	for (let i = 1; i <= stock; i++) {
 		options.push(i);
 	}
 	return options.map(idx => <option key={idx}>{idx}</option>);

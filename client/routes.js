@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 import {Main, Cart, Login, Signup, UserHome, SingleProductPage, ProductList, OrderList, AddItem, AdminItemEdit, AdminItemList, OrderItem, OrderItemEdit, AdminUserEdit, AdminUserList} from './components'
-
+import RateForm from './components/rate-form'
 import { me, fetchItems, fetchOrders, fetchCategories, fetchUsers } from './store'
 
 /**
@@ -19,6 +19,7 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props
+
     return (
       <Router history={history}>
         <Main>
@@ -37,6 +38,8 @@ class Routes extends Component {
             <Route path="/add-item" component={AddItem} />
             <Route exact path="/admin-user-list" component={AdminUserList} />
             <Route path="/admin-user-list/:userId" component={AdminUserEdit} />
+            {/* TODO: Place form into isLoggedIn field after this is functional */}
+            {isLoggedIn && <Route exact path="/product-rating/:itemId" component={RateForm} />}
             {
               isLoggedIn &&
               <Switch>
