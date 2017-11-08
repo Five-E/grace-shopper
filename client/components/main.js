@@ -48,7 +48,9 @@ class Main extends Component {
           </div></Link>
         </nav>
         <hr />
+        <div className="content">
         {children}
+        </div>
       </div>
     )
   }

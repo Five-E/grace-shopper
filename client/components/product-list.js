@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ProductItem } from './product-item'
-import { putItemInCart } from '../store'
+import { addOneItemToCart  } from '../store'
 import Sidebar from './sidebar'
 import FilterInput from './filter-input'
 
@@ -69,11 +69,11 @@ const mapState = (state) => {
 }
 
 const mapDispatch = (dispatch) => {
-  return {
-    addToCart(item, user) {
-      dispatch(putItemInCart(item, user))
-    }
-  }
+	return {
+		addToCart (item, user, cart) {
+			dispatch(addOneItemToCart(item, user))
+		}
+	}
 }
 
 export default connect(mapState, mapDispatch)(ProductList)
