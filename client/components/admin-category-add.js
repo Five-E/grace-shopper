@@ -8,7 +8,7 @@ class AdminCategoryAdd extends Component {
 
   constructor(props) {
     super(props)
-    this.satate = {
+    this.state = {
       error: false
     }
     this.submitHandler = this.submitHandler.bind(this)
@@ -22,7 +22,8 @@ class AdminCategoryAdd extends Component {
     if (categories.find(category => category.name === name)) {
       this.setState({error: true})
     } else {
-      this.props.addCategory({name, image})
+      this.props.update({name, image})
+      this.props.history.push('/admin-item-list')      
     }
   }
 

@@ -29,7 +29,6 @@ class AddItem extends Component {
     }
     this.props.addNewItem(newItem);
     this.props.history.push('/product-list')
-    console.log('props', this.props);
   }
 
   render() {
