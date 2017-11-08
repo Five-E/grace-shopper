@@ -10,13 +10,13 @@ const ITEM_UPDATED = 'ITEM_UPDATED'
 const ITEM_DELETED = 'ITEM_DELETED'
 
 /* ------------   ACTION CREATORS     ------------------ */
-const itemsFetched = items => ({ type: ITEMS_FETCHED, items })
+export const itemsFetched = items => ({ type: ITEMS_FETCHED, items })
 
-const itemAdded = item => ({ type: ITEM_ADDED, item })
+export const itemAdded = item => ({ type: ITEM_ADDED, item })
 
-const itemUpdated = item => ({ type: ITEM_UPDATED, item })
+export const itemUpdated = item => ({ type: ITEM_UPDATED, item })
 
-const itemDeleted = itemId => ({ type: ITEM_DELETED, itemId })
+export const itemDeleted = itemId => ({ type: ITEM_DELETED, itemId })
 
 /* ------------       REDUCER     ------------------ */
 export default function (state = defaultItems, action) {

@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ProductItem } from './product-item'
-import { putItemInCart  } from '../store'
+import { putItemInCart } from '../store'
 import Sidebar from './sidebar'
 import FilterInput from './filter-input'
 
 
-class ProductList extends React.Component{
+class ProductList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +19,7 @@ class ProductList extends React.Component{
 
   handleChange(event) {
     const inputValue = event.target.value;
-    this.setState({inputValue});
+    this.setState({ inputValue });
   }
 
 
@@ -31,6 +31,7 @@ class ProductList extends React.Component{
       items = items.filter(item => !!item.categories.find(category => category.id === this.props.categoryId))
     }
     items = items.filter(item => item.name.match(inputRegEx))
+
     return (
       <div className="wrapper">
         <Sidebar />
@@ -50,8 +51,8 @@ class ProductList extends React.Component{
               )
             })
           }
+          </div>
         </div>
-      </div>
       </div>
     )
   }
@@ -59,18 +60,20 @@ class ProductList extends React.Component{
 
 
 const mapState = (state) => {
-  return { items: state.items,
-           user: state.user,
-           cart: state.cart,
-           categoryId: state.selectedCategory }
+  return {
+    items: state.items,
+    user: state.user,
+    cart: state.cart,
+    categoryId: state.selectedCategory
+  }
 }
 
 const mapDispatch = (dispatch) => {
-	return {
-		addToCart (item, user) {
-			dispatch(putItemInCart(item, user))
-		}
-	}
+  return {
+    addToCart(item, user) {
+      dispatch(putItemInCart(item, user))
+    }
+  }
 }
 
 export default connect(mapState, mapDispatch)(ProductList)
