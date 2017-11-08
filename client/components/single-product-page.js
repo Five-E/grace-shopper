@@ -1,7 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+
 import { addOneItemToCart  } from '../store'
+import ReviewList from './review-list'
 
 /**
  * COMPONENT
@@ -20,11 +22,12 @@ export const SingleProductPage = (props) => {
 	} else {
 		buttonStatus = false
 	}
+
 	const divStyle = buttonStatus ? {
 		color: 'white',
 		textShadow: '2px 2px black',
 		fontWeight: 'bold',
-		textAlign:'right',
+		textAlign: 'right',
 		backgroundImage: 'url(../images/crazyrock.png)',
 		backgroundSize: 'contain',
 		backrgoundrepeat: 'no-repeat',
@@ -58,6 +61,9 @@ export const SingleProductPage = (props) => {
 
 			<h1>Reviews Placeholder</h1>
 			{/* Create Reviews List component */}
+
+			<button><NavLink to={`/product-list`}>Return to List</NavLink></button>
+			<ReviewList name={name} productId={+id} />
 		</div>
 	);
 }

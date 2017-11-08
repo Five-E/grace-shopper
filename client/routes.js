@@ -4,10 +4,11 @@ import { Router } from 'react-router'
 import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Cart, Login, Signup, UserHome, SingleProductPage, ProductList, OrderList, AddItem, AdminItemEdit, AdminItemList, OrderItem, OrderItemEdit, AdminUserEdit, AdminUserList, UserOrders, Checkout} from './components'
-import {OrderSuccess} from './components'
 
-import { me, fetchItems, fetchOrders, fetchCategories, fetchUsers, fetchStatuses } from './store'
+import {Main, Cart, Login, Signup, UserHome, SingleProductPage, ProductList, OrderList, AddItem, AdminHome, AdminItemEdit, AdminItemList, AdminCategoryList, AdminCategoryAdd, AdminCategoryEdit, OrderItem, OrderItemEdit, AdminUserEdit, AdminUserList, UserOrders, Checkout} from './components'
+import { me, fetchItems, fetchOrders, fetchCategories, fetchUsers, fetchStatuses, fetchReviews  } from './store'
+import RateForm from './components/rate-form'
+import {OrderSuccess} from './components'
 
 /**
  * COMPONENT
@@ -20,6 +21,7 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props
+
     return (
       <Router history={history}>
         <Main>
@@ -31,15 +33,19 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/product-list/:itemsId" component={SingleProductPage} />
             <Route path="/product-list" component={ProductList} />
+            <Route exact path="/admin-item-list" component={AdminItemList} />
+            <Route exact path="/admin-category-list" component={AdminCategoryList} />
+            <Route exact path="/admin-category-add" component={AdminCategoryAdd} />
+            <Route path="/admin-item-list/:itemsId" component={AdminItemEdit} />
+            <Route path="/admin-category-list/:categoryId" component={AdminCategoryEdit} />
             <Route path="/cart" component={Cart} />
-            <Route exact path="/admin-list/" component={AdminItemList} />
-            <Route path="/admin-list/:itemsId" component={AdminItemEdit} />
             <Route path="/order-list/edit/:orderId" component={OrderItemEdit} />
             <Route path="/order-list/:orderId" component={OrderItem} />
             <Route exact path="/order-list" component={OrderList} />
             <Route path="/add-item" component={AddItem} />
             <Route exact path="/admin-user-list" component={AdminUserList} />
             <Route path="/admin-user-list/:userId" component={AdminUserEdit} />
+            {isLoggedIn && <Route exact path="/product-rating/:itemId" component={RateForm} />}
             {
               isLoggedIn &&
               <Switch>
@@ -80,6 +86,7 @@ const mapDispatch = (dispatch, ownProps) => {
       dispatch(fetchCategories())
       dispatch(fetchUsers())
       dispatch(fetchStatuses())
+      dispatch(fetchReviews())
     }
   }
 }

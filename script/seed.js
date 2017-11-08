@@ -70,56 +70,48 @@ const itemData = [
     picture: 'http://az616578.vo.msecnd.net/files/2016/04/03/6359525694436325221322078085_dwaynejohnson.jpg',
     price: 15000.99,
     stock: 1,
-    categoryId: 2
   },
   {
     name: 'Bath Salt',
     picture: 'http://az616578.vo.msecnd.net/files/2016/04/03/6359525694436325221322078085_dwaynejohnson.jpg',
     price: 25.34,
     stock: 16,
-    categoryId: 1
   },
   {
     name: 'Kimberlite',
     picture: 'http://az616578.vo.msecnd.net/files/2016/04/03/6359525694436325221322078085_dwaynejohnson.jpg',
     price: 12.23,
     stock: 50,
-    categoryId: 2
   },
   {
     name: 'Picrite',
     picture: 'http://az616578.vo.msecnd.net/files/2016/04/03/6359525694436325221322078085_dwaynejohnson.jpg',
     price: 5.35,
     stock: 70,
-    categoryId: 1
   },
   {
     name: 'Icelandite',
     picture: 'http://az616578.vo.msecnd.net/files/2016/04/03/6359525694436325221322078085_dwaynejohnson.jpg',
     price: 1225.77,
     stock: 5,
-    categoryId: 3
   },
   {
     name: 'Charnockite',
     picture: 'http://az616578.vo.msecnd.net/files/2016/04/03/6359525694436325221322078085_dwaynejohnson.jpg',
     price: 37854.33,
     stock: 99,
-    categoryId: 2
   },
   {
     name: 'Geodude',
     picture: 'http://az616578.vo.msecnd.net/files/2016/04/03/6359525694436325221322078085_dwaynejohnson.jpg',
     price: 70.50,
     stock: 50,
-    categoryId: 3
   },
   {
     name: 'Gabbro',
     picture: 'http://az616578.vo.msecnd.net/files/2016/04/03/6359525694436325221322078085_dwaynejohnson.jpg',
     price: 33.10,
     stock: 60,
-    categoryId: 1
   }
 ];
 
@@ -135,8 +127,25 @@ const categoryData = [
   {
     name: 'Sedimentary',
     image: 'https://qph.ec.quoracdn.net/main-qimg-c24d1fe669b03a09c7bc7537f08e283a-c'
+  },
+  {
+    name: 'Casual',
+    image: 'https://qph.ec.quoracdn.net/main-qimg-c24d1fe669b03a09c7bc7537f08e283a-c'
+  },
+  {
+    name: 'Luxury',
+    image: 'https://qph.ec.quoracdn.net/main-qimg-c24d1fe669b03a09c7bc7537f08e283a-c'
+  },
+  {
+    name: 'Smart',
+    image: 'https://qph.ec.quoracdn.net/main-qimg-c24d1fe669b03a09c7bc7537f08e283a-c'
+  },
+  {
+    name: 'Classic',
+    image: 'https://qph.ec.quoracdn.net/main-qimg-c24d1fe669b03a09c7bc7537f08e283a-c'
   }
 ];
+
 
 const purchasedItemData = [
   {
@@ -242,116 +251,65 @@ const reviewData = [
 ]
 
 // User Seeding
-const promiseArrUsers = () => {
-  return userData.map(user => {
-    return User.build(user)
-  })
-};
-
 const createUsers = () => {
-  return Promise.map(promiseArrUsers(),
-  function (user) {
-    return user.save();
-  })
-}
-
-// Item Seeding
-const promiseArrItems = () => {
-  return itemData.map(item => {
-    return Item.build(item)
-  })
+  return Promise.all(userData.map(user => {
+    return User.create(user)
+  }))
 };
-
-const createItems = () => {
-  return Promise.map(promiseArrItems(),
-  function (item) {
-    return item.save();
-  })
-}
 
 // Catergory Seeding
-const promiseArrCategorys = () => {
-  return categoryData.map(category => {
-    return Category.build(category)
-  })
+const createCategorys = () => {
+  return Promise.all(categoryData.map(category => {
+    return Category.create(category)
+  }))
 };
 
-const createCategorys = () => {
-  return Promise.map(promiseArrCategorys(),
-  function (category) {
-    return category.save();
-  })
-}
+// Item Seeding
+const createItems = () => {
+  return Promise.all(itemData.map(item => {
+    return Item.create(item)
+    .then(createdItem => createdItem.setCategories([Math.ceil(Math.random() * 3), Math.ceil(Math.random() * 4) + 3]))
+  }))
+};
 
 // PurchasedItem Seeding
-const promiseArrPurchasedItems = () => {
-  return purchasedItemData.map(purchasedItem => {
-    return PurchasedItem.build(purchasedItem)
-  })
+const createPurchasedItems = () => {
+  return Promise.all(purchasedItemData.map(purchasedItem => {
+    return PurchasedItem.create(purchasedItem)
+  }))
 };
 
-const createPurchasedItems = () => {
-  return Promise.map(promiseArrPurchasedItems(),
-  function (purchasedItem) {
-    return purchasedItem.save();
-  })
-}
 
 // CartItem Seeding
-const promiseArrCartItems = () => {
-  return cartItemData.map(cartItem => {
-    return CartItem.build(cartItem)
-  })
+const createCartItems = () => {
+  return Promise.all(cartItemData.map(cartItem => {
+    return CartItem.create(cartItem)
+  }))
 };
 
-const createCartItems = () => {
-  return Promise.map(promiseArrCartItems(),
-  function (cartItem) {
-    return cartItem.save();
-  })
-}
 
 // Status Data Seeding
-const promiseArrStatus = () => {
-  return statusData.map(status => {
-    return Status.build(status)
-  })
-};
-
 const createStatus = () => {
-  return Promise.map(promiseArrStatus(),
-  function (status) {
-    return status.save();
-  })
-}
+  return Promise.all(statusData.map(status => {
+    return Status.create(status)
+  }))
+};
 
 // Order Data Seeding
-const promiseArrOrders = () => {
-  return orderData.map(order => {
-    return Order.build(order)
-  })
+const createOrders = () => {
+  return Promise.all(orderData.map(order => {
+    return Order.create(order)
+  }))
 };
 
-const createOrders = () => {
-  return Promise.map(promiseArrOrders(),
-  function (order) {
-    return order.save();
-  })
-}
 
 // Review Data Seeding
-const promiseArrReviews = () => {
-  return reviewData.map(review => {
-    return Review.build(review)
-  })
+const createReviews = () => {
+  return Promise.all(reviewData.map(review => {
+    return Review.create(review)
+  }))
 };
 
-const createReviews = () => {
-  return Promise.map(promiseArrReviews(),
-  function (review) {
-    return review.save();
-  })
-}
 
 const seed = () => {
   return createUsers()

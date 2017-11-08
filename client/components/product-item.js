@@ -10,6 +10,7 @@ export const ProductItem = (props) => {
 
 	if (!props) return <div>Loading>... </div>
 	const { name, picture, priceDollars, id, description, stock } = props.itemInfo
+
 	let buttonStatus
 	if (stock === 0 || props.quantityInCart >= stock) {
 		buttonStatus = true
@@ -20,12 +21,13 @@ export const ProductItem = (props) => {
 		color: 'white',
 		textShadow: '2px 2px black',
 		fontWeight: 'bold',
-		textAlign:'right',
+		textAlign: 'right',
 		backgroundImage: 'url(./images/crazyrock.png)',
 		backgroundSize: 'contain',
 		backrgoundrepeat: 'no-repeat',
 		width: '100%'
 	} : {}
+
 	return (
 		<div className="col-xs-18 col-sm-6 col-md-3">
 			<div className="thumbnail">
@@ -53,6 +55,9 @@ export const ProductItem = (props) => {
 					}} className="btn btn-info btn-xl" style={divStyle}>
 					{buttonStatus ? 'No more rock... in stock' : 'Add to Cart'}
 					</button>
+					<p>RATING_PLACE_HOLDER</p>
+					{/* TODO: Conditionally render the rating button if user is logged in. */}
+					<NavLink to={`/product-rating/${id}`} className="btn btn-info btn-xs" role="button">Rate this Product</NavLink>
 				</div>
 			</div>
 		</div>

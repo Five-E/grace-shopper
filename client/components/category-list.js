@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectCategory, unselectCategory } from '../store';
+import { categorySelected, categoryUnselected } from '../store';
 
 const CategoryList = (props) => {
   return (
@@ -28,12 +28,12 @@ const mapDispatch = (dispatch) => {
     handleClick(event) {
       const categoryId = event.target.value;
       event.preventDefault();
-      dispatch(selectCategory(categoryId));
+      dispatch(categorySelected(categoryId));
     },
 
     showAllProducts(event) {
       event.preventDefault();
-      dispatch(unselectCategory());
+      dispatch(categoryUnselected());
     }
   }
 }
