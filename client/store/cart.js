@@ -84,7 +84,7 @@ export const deleteCartItem = (item, user) => {
 const postCartItem = (itemObj) => {
   return axios.post(`/api/cartItems`, itemObj)
   .then(res => res.data)
-} 
+}
 
 export const setCartItemQuantity = (item, user) => {
   return function thunk (dispatch) {
@@ -159,7 +159,6 @@ export const addToCartItemQuantity = (item, user) => {
 
 export const addOneItemToCart = (item, user) => {
   return function thunk (dispatch) {
-    Object.keys
     if (user.id) {
       const itemObj = {
         itemId: item.id,
@@ -196,7 +195,7 @@ export const initializeCartState = (user) => {
         const items = JSON.parse(localStoreCart)
         Object.keys(items).map(itemId => {
           const itemObj = {
-            id: parseInt(itemId), 
+            id: parseInt(itemId),
             quantity: items[itemId]
           }
           dispatch(setCartItemQuantity(itemObj, user))
@@ -219,11 +218,10 @@ export const initializeCartState = (user) => {
           window.localStorage.clear()
           for (let itemId in localCart) {
             if (localCart.hasOwnProperty(itemId)) {
-              const item = { 
+              const item = {
                 id: parseInt(itemId),
                 quantity: parseInt(localCart[itemId])
               }
-
               dispatch(addToCartItemQuantity(item, user))
             }
           }
