@@ -11,7 +11,7 @@ const mustHavePassword = (req, res, next) => {
 }
 
 router.post('/login', mustHavePassword, (req, res, next) => {
-  User.findOne({where: {email: req.body.email}})
+  User.findOne({ where: { email: req.body.email } })
     .then(user => {
       if (!user) {
         res.status(401).send('User not found')
