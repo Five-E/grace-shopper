@@ -57,7 +57,7 @@ export const ProductItem = (props) => {
 					</button>
 					<p>RATING_PLACE_HOLDER</p>
 					{/* TODO: Conditionally render the rating button if user is logged in. */}
-					<NavLink to={`/product-rating/${id}`} className="btn btn-info btn-xs" role="button">Rate this Product</NavLink>
+					<Link to={`/product-rating/${id}`} className="btn btn-info btn-xs" role="button">Rate this Product</Link>
 				</div>
 			</div>
 		</div>
