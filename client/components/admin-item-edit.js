@@ -35,7 +35,7 @@ class AdminItemEdit extends Component {
   clickHandler() {
     const itemId = +this.props.match.params.itemsId
     this.props.delete(itemId)
-    this.props.history.push('/admin-list')
+    this.props.history.push('/admin-item-list')
   }
 
 
