@@ -11,7 +11,9 @@ const PurchasedItemsComponent = props => {
           <b>{purchasedItem.item.name}</b>
           <img height="40px" src={purchasedItem.item.picture} />
           <ul>
-            <li>Category: {purchasedItem.item.category.name}</li>
+            <li>Category: {purchasedItem.item.categories.map(cat => {
+              return <span key={cat.name}>{cat.name}, </span>
+            })}</li>
             <li>Purchase Price: {purchasedItem.purchasePrice}</li>
             <li>Purchase Quantity: {purchasedItem.purchaseQuantity}</li>
           </ul>
