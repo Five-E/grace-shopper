@@ -15,12 +15,6 @@ class ProductList extends React.Component {
       localitems: []
     }
     this.handleChange = this.handleChange.bind(this);
-    this.filterItemsByCategory = this.filterItemsByCategory.bind(this);
-  }
-
-
-  filterItemsByCategory(item) {
-    return item.categoryId === this.state.categoryId
   }
 
   handleChange(event) {
@@ -32,10 +26,9 @@ class ProductList extends React.Component {
   render() {
     const inputValue = this.state.inputValue
     const inputRegEx = new RegExp(this.state.inputValue, 'i');
-    // const items = this.props.items.filter(this.filterItemsByCategory).filter(item => item.name.match(inputValue));
     let items = this.props.items;
     if (this.props.categoryId) {
-      items = items.filter(item => item.categoryId === this.props.categoryId)
+      items = items.filter(item => !!item.categories.find(category => category.id === this.props.categoryId))
     }
     items = items.filter(item => item.name.match(inputRegEx))
 
@@ -43,21 +36,21 @@ class ProductList extends React.Component {
       <div className="wrapper">
         <Sidebar />
         <div className="content">
-          <h3>Product List Page</h3>
-          <FilterInput
-            handleChange={this.handleChange}
-            inputValue={inputValue}
-          />
-          <div className="row">
-            {
-              items.map(item => {
-                return (
-                  <div key={item.id}>
-                    <ProductItem quantityInCart={this.props.cart[item.id]} user={this.props.user} addToCart={this.props.addToCart} itemInfo={item} />
-                  </div>
-                )
-              })
-            }
+        <h3>Product List Page</h3>
+        <FilterInput
+        handleChange={this.handleChange}
+        inputValue={inputValue}
+      />
+        <div className="row">
+          {
+           items && items.map(item => {
+              return (
+                <div key={item.id}>
+                  <ProductItem quantityInCart={this.props.cart[item.id]} user={this.props.user} addToCart={this.props.addToCart} itemInfo={item} />
+                </div>
+              )
+            })
+          }
           </div>
         </div>
       </div>

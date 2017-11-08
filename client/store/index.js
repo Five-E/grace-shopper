@@ -11,9 +11,10 @@ import categories from './category'
 import selectedCategory from './selectedCategory'
 import review from './review'
 import statuses from './status'
+import itemCategories from './itemCategories'
 
 
-const reducer = combineReducers({user, items, orders, categories, cart, selectedCategory, users, review, statuses})
+const reducer = combineReducers({user, items, orders, categories, cart, selectedCategory, users, statuses, itemCategories, review})
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({ collapsed: true })
@@ -28,6 +29,7 @@ export * from './cart'
 export * from './orders'
 export * from './category'
 export * from './selectedCategory'
+export * from './itemCategories'
 export * from './users'
 export * from './review'
 export * from './status'

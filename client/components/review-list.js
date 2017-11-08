@@ -5,8 +5,8 @@ class ReviewList extends Component {
 
   render() {
     const { productId, review, users, name } = this.props
-    const reviewsForProduct = review.filter(review => review.itemId === productId)
-
+    const reviewsForProduct = review.filter(rev => rev.item.id === productId)
+    console.log('in reviewList component, review', reviewsForProduct)
     return (
       <div>
         <h2>Reviews for {name}</h2>

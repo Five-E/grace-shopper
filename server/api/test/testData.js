@@ -63,7 +63,7 @@ const Items = [{
   picture: 'http://az616578.vo.msecnd.net/files/2016/04/03/6359525694436325221322078085_dwaynejohnson.jpg',
   price: 1000000,
   stock: 9,
-  categoryId: 2
+  // categories: [1, 2]
 }]
 
 const Categories = [{

@@ -70,7 +70,7 @@ export const updateItem = (item) => {
     axios.put(`/api/items/${item.id}`, item)
       .then(res => {
         const updatedItem = res.data[1][0]
-        dispatch(itemUpdated(updatedItem));
+        dispatch(itemUpdated(updatedItem))
       })
       .catch(() => console.log('Updating item unsuccessful'));
   }

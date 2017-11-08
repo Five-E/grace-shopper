@@ -9,7 +9,7 @@ const AdminItemList = (props) => {
   if (!items) return null;
   return (
     <div>
-      <h3>Admin Product List Page</h3>
+      <h3>Admin Product List</h3>
       <div className="row">
         {
           items.map(item => {
@@ -26,7 +26,9 @@ const AdminItemList = (props) => {
 }
 
 const mapState = (state) => {
-  return { items: state.items }
+  return {
+    items: state.items
+   }
 }
 
 const mapDispatch = null;
