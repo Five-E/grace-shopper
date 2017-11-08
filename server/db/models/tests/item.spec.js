@@ -24,7 +24,6 @@ describe('Item model', () => {
         price: 109.99,
         stock: 1,
         description: 'rock-n-sock',
-        categoryId: 1
       })
       .then(item => {
         theRock = item
@@ -38,12 +37,6 @@ describe('Item model', () => {
       expect(theRock.description).to.be.equal('rock-n-sock')
     })
 
-    it('makes sure a category is associated with each item', () => {
-      return Item.getWithCategory(theRock.id)
-      .then(item => {
-        expect(item[0].category.name).to.be.equal('igneous')
-      })
-
-    })
+    
   })
 })

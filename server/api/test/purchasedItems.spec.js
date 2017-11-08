@@ -27,9 +27,10 @@ describe('Purchased Items routes', () => {
         return User.bulkCreate(testData.Users, OPTIONS)
         .then(() => { return Status.bulkCreate(testData.Statuses, OPTIONS) })
         .then(() => { return Category.bulkCreate(testData.Categories, OPTIONS) })
-        .then(() => { return Item.bulkCreate(testData.Items, OPTIONS) })
+        .then(() => { return Item.create(testData.Items[0], OPTIONS).then(createdItem => createdItem.setCategories([1,2])) })
         .then(() => { return Orders.bulkCreate(testData.Orders, OPTIONS) })
-        .then(() => { return PurchasedItem.bulkCreate(testData.PurchaseItem, OPTIONS) })
+        .then(() => { return PurchasedItem.create(testData.PurchaseItem[0], OPTIONS) })
+        // .then((createdPurchasedItem) => createdPurchasedItem.setCategories([1,2]))
         .catch(console.error)
       })
 
@@ -40,7 +41,7 @@ describe('Purchased Items routes', () => {
           .then(res => {
             expect(res.body).to.be.an('array')
             expect(res.body[0].item.id).to.be.equal(1)
-            expect(res.body[0].item.category.id).to.be.equal(2)
+            expect(res.body[0].item.categories.length).to.be.equal(2)
             expect(res.body[0].purchasePrice).to.be.equal(0.01)
             expect(res.body[0].purchaseQuantity).to.be.equal(100)
           })
@@ -54,7 +55,7 @@ describe('Purchased Items routes', () => {
         return User.bulkCreate(testData.Users, OPTIONS)
         .then(() => { return Status.bulkCreate(testData.Statuses, OPTIONS) })
         .then(() => { return Category.bulkCreate(testData.Categories, OPTIONS) })
-        .then(() => { return Item.bulkCreate(testData.Items, OPTIONS) })
+        .then(() => { return Item.create(testData.Items[0], OPTIONS).then(createdItem => createdItem.setCategories([1,2])) })
         .then(() => { return Orders.bulkCreate([
           {
             userId: 2,
@@ -89,7 +90,7 @@ describe('Purchased Items routes', () => {
           .then(res => {
             expect(res.body).to.be.an('array')
             expect(res.body[0].item.id).to.be.equal(1)
-            expect(res.body[0].item.category.id).to.be.equal(2)
+            expect(res.body[0].item.categories.length).to.be.equal(2)
             expect(res.body[0].orderId).to.be.equal(2)
           })
       })

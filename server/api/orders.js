@@ -4,7 +4,7 @@ const { mustBeAdmin } = require('./auth-util')
 
 module.exports = router
 
-router.get('/', mustBeAdmin, (req, res, next) => {
+router.get('/', (req, res, next) => {
   Order.findAll()
     .then(Orders => res.json(Orders))
     .catch(next)
