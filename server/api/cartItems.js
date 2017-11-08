@@ -22,12 +22,11 @@ router.delete('/:userId', (req,res,next) => {
 })
 
 router.post('/addQuantity', (req, res, next) => {
-  CartItem.findOne({ where: {userId: req.body.userId, itemId: req.body.itemId} })
-    .then(item => {
-      return item
-    })
-    .then(item => {
-      const SUM = item.quantity + req.body.quantity
+  CartItem.findOrCreate({ where: {userId: req.body.userId, itemId: req.body.itemId} })
+    .spread((item, wasCreated) => {
+      console.log(item)
+      let currentQuantity = wasCreated ? 0 : item.quantity
+      const SUM = currentQuantity + req.body.quantity
       return item.update({quantity: SUM})
     })
     .then(updatedItem => res.json(updatedItem))
