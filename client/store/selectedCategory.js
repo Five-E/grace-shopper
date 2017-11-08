@@ -27,16 +27,3 @@ export default function (state = defaultCategoryId, action) {
   }
 }
 
-
-/* ------------   THUNK CREATORS     ------------------ */
-export const selectCategory = (categoryId) => {
-  return function thunk (dispatch) {
-    dispatch(categorySelected(categoryId));
-  }
-}
-
-export const unselectCategory = () => {
-  return function thunk (dispatch) {
-    dispatch(categoryUnselected());
-  }
-}

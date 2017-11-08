@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Item } = require('../db/models')
+const { Item, Category } = require('../db/models')
 const { mustBeAdmin } = require('./auth-util')
 
 module.exports = router
@@ -9,6 +9,13 @@ router.get('/', (req, res, next) => {
     .then(items => res.json(items))
     .catch(next)
 })
+
+router.get('/:itemId', (req, res, next) => {
+  Item.findById(req.params.itemId)
+  .then(item => res.json(item))
+  .catch(next)
+})
+
 
 router.post('/', mustBeAdmin, (req, res, next) => {
   Item.create(req.body)
@@ -31,4 +38,25 @@ router.delete('/:itemId', mustBeAdmin, (req, res, next) => {
       res.json(result)
     })
     .catch(next)
+})
+
+router.put('/:itemId/categories', (req, res, next) => {
+  Item.findById(req.params.itemId)
+  .then(item => {
+    return item.addCategory(req.body.id)})
+  .then(() => {
+    return Category.findById(req.body.id)
+  })
+  .then((result) => res.json(result))
+  .catch(next)
+})
+
+router.delete('/:itemId/categories', (req, res, next) => {
+  Item.findById(req.params.itemId)
+  .then(item => {
+    return item.removeCategory(+req.body.id)
+  })
+  .then(result => {
+    res.json(result)})
+  .catch(next)
 })
