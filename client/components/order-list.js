@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { statusSelected, statusUnselected } from '../store'
 
-class OrderList extends Component {
+export class OrderList extends Component {
 
   render() {
     let orders = this.props.orders
 
-    if (!orders) return (<div id="warning"> The Rock can't cook up orders because we don't have any orders to cook. Get some people to buy rocks. </div>)
+    if (!orders.length) return (<div id="warning"> The Rock can't cook up orders because we don't have any orders to cook. Get some people to buy rocks. </div>)
     console.log(this.props.selectedStatus)
     if (this.props.selectedStatus) {
       orders = orders.filter((order) => {
@@ -21,7 +21,7 @@ class OrderList extends Component {
         <div>
           <button className="btn btn-primary categoryFilter" onClick={this.props.showAll}> All </button>
           {
-            this.props.statuses.map(status => {
+            this.props.statuses && this.props.statuses.map(status => {
               return (<button key={status.name} onClick={this.props.handleClick} className="btn btn-primary categoryFilter">{status.name}</button>)
             })
           }
