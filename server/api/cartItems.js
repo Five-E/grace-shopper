@@ -16,26 +16,34 @@ router.delete('/:userId/:itemId', (req,res,next) => {
     .then(_ => res.send('dropped by the rock'))
 })
 
+router.delete('/:userId', (req,res,next) => {
+  CartItem.destroy({ where: req.params})
+    .then(_ => res.send('dropped by the rock'))
+})
+
+router.post('/addQuantity', (req, res, next) => {
+  CartItem.findOne({ where: {userId: req.body.userId, itemId: req.body.itemId} })
+    .then(item => {
+      return item
+    })
+    .then(item => {
+      const SUM = item.quantity + req.body.quantity
+      return item.update({quantity: SUM})
+    })
+    .then(updatedItem => res.json(updatedItem))
+    .catch(next)
+})
+
 router.post('/', (req, res, next) => {
   CartItem.findOrCreate({ where: {userId: req.body.userId, itemId: req.body.itemId} })
     .spread((item, wasCreated) => {
-      if (req.body.quantity === 0 ) {
-        item.destroy()
-          .then(res.send('removed from cart'))
-      }
-      if (!wasCreated) {
-        if (req.body.quantity !== 1) {
-          item.update({quantity: req.body.quantity})
-          .then(updatedItem => res.json(updatedItem))
-        } else {
-          item.update({quantity: item.quantity + 1})
-          .then(updatedItem => res.json(updatedItem))
-        }
+      if (req.body.quantity) {
+        return item.update({quantity: req.body.quantity})
       } else {
-        item.update({quantity: req.body.quantity})
-          .then(newItem => res.json(newItem))
+        return item.update({quantity: item.quantity + 1})
       }
     })
+    .then(updatedItem => res.json(updatedItem))
     .catch(next)
 })
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 /**
  * COMPONENT
@@ -11,7 +11,7 @@ export const ProductItem = (props) => {
 	if (!props) return <div>Loading>... </div>
 	const { name, picture, priceDollars, id, description, stock } = props.itemInfo
 	let buttonStatus
-	if (props.quantityInCart >= stock) {
+	if (stock === 0 || props.quantityInCart >= stock) {
 		buttonStatus = true
 	} else {
 		buttonStatus = false
@@ -26,30 +26,33 @@ export const ProductItem = (props) => {
 		backrgoundrepeat: 'no-repeat',
 		width: '100%'
 	} : {}
-	
 	return (
 		<div className="col-xs-18 col-sm-6 col-md-3">
 			<div className="thumbnail">
-				<NavLink to={`/product-list/${id}`}>
+				<Link to={`/product-list/${id}`}>
 					<img src={picture} className="item-img" />
-				</NavLink>
+				</Link>
 				<div className="caption">
-					<NavLink to={`/product-list/${id}`}>
+					<Link to={`/product-list/${id}`}>
 						<h3>{name}</h3>
-					</NavLink>
+					</Link>
 					<p>{description}</p>
-					<p>Price: ${priceDollars}</p>
-					<button disabled={buttonStatus} onClick={(e) => { 
-						if(!props.quantityInCart || props.quantityInCart < stock ) {
-							props.addToCart(props.itemInfo, props.user) 
+					<p>Price: {priceDollars}</p>
+					<p>In Stock: {stock} {props.quantityInCart >= 1 && ` | ${props.quantityInCart} in cart`}</p>
+					<button
+					disabled={buttonStatus} onClick={(e) => {
+						if (!props.quantityInCart || props.quantityInCart < stock ) {
+							props.addToCart(props.itemInfo, props.user, props.cart)
 							const updatedQuantity = props.quantityInCart || 1
-							if (updatedQuantity+1 > stock) {
+							if (updatedQuantity + 1 > stock) {
 								buttonStatus = true
 							}
 						} else {
 							buttonStatus = true
 						}
-					}} className="btn btn-info btn-xs" style={divStyle}>{buttonStatus ? 'No more rock... in stock' : 'Add to Cart'}</button> {props.quantityInCart >= 1 && `${props.quantityInCart} in cart`}
+					}} className="btn btn-info btn-xl" style={divStyle}>
+					{buttonStatus ? 'No more rock... in stock' : 'Add to Cart'}
+					</button>
 				</div>
 			</div>
 		</div>

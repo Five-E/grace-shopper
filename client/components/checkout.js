@@ -44,7 +44,19 @@ class Checkout extends Component {
   render() {
     console.log("============state",this.state)
     console.log("============PROPS==================",this.props)
-    if (!Object.keys(this.props.cart).length) return <div>Dwaynius Maxius says you can not checkout without a rock.</div>
+    const cartItemIds = Object.keys(this.props.cart)
+    if (!cartItemIds.length) return <div>Dwaynius Maxius says you can not checkout without a rock.</div>
+    let total = 0
+    if (!this.props.items) return <div>Loading</div>
+    const cartItems = cartItemIds.map(cartItemId => {
+      const itemInfo = this.props.items.find(item => {
+        return item.id === parseInt(cartItemId)
+      })
+      let itemSub = (itemInfo.price * this.props.cart[cartItemId])
+      total = total + itemSub
+      return <p key={cartItemId}>{this.props.cart[cartItemId]} x {itemInfo.name} ({itemInfo.priceDollars} per rock) = ${itemSub}</p>
+    })
+
     return(<div className="split">
       <div>
       <h1>Checkout</h1>
@@ -70,8 +82,8 @@ class Checkout extends Component {
       </form></div>
       <div>
         <h1>Cart</h1>
-        <p>cart items hsould go hur</p>
-        {/*<Cart checkout="true" />*/}
+        {cartItems}
+        <b>Order Total: ${total}</b>
       </div>
       
       </div>)

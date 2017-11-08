@@ -10,6 +10,12 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
+router.get('/:orderId', (req, res, next) => {
+  Order.findById(req.params.orderId)
+    .then(Orders => res.json(Orders))
+    .catch(next)
+})
+
 router.post('/', (req, res, next) => {
   const {order, purchasedItems} = req.body
   console.log(req.body)
