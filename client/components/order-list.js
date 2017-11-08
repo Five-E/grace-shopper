@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-const OrderList = (props) => {
+export const OrderList = (props) => {
   const orders = props.orders
 
   if(!orders) return (<div id="warning"> The Rock can't cook up orders because we don't have any orders to cook. Get some people to buy rocks. </div>)
