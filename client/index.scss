@@ -9,6 +9,10 @@ body {
     display: block;
   }
 
+  .inline {
+    display: inline;
+  }
+
   nav a {
     display: inline-block;
     margin: 1em;
@@ -18,4 +22,44 @@ body {
     margin: 1em;
     display: inline-block;
   }
+
+  .cart {
+    padding: 10px;
+    width: 200px; 
+    height: 200px;
+    border: solid 1px red; 
+  }
+  .cart img {
+    width: 180px; 
+    height: 180px; 
+    position: absolute;
+    z-index: -1;
+  }
+  .cart h1 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    margin: auto;
+    height: 1.3em;
+    width: 1.3em;
+    background-color: red;
+    border-radius: 50%;
+  }
+  .cart p {
+    position: relative;
+    bottom: -130px;
+    padding: 2px 0px 2px 0px;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    margin: auto;
+    padding: auto;
+    width: 100%;
+    background-color: red;
+  }
+  
 }

@@ -11,6 +11,12 @@ const PurchasedItem = module.exports = db.define('purchasedItem', {
             min: 0
         }
     },
+	purchasePriceDollars: {
+		type: Sequelize.VIRTUAL,
+		get: function () {
+			return '$'+ parseFloat(this.purchasePrice).toFixed(2)
+		}
+	},
     purchaseQuantity: {
         type: Sequelize.INTEGER,
         allowNull: false,

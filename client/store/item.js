@@ -79,8 +79,8 @@ export const updateItem = (item) => {
 
 export const deleteItem = (itemId) => {
   return function thunk(dispatch) {
-    dispatch(itemDeleted(itemId));
     axios.delete(`/api/items/${itemId}`)
-      .catch(() => console.log('Updating item unsuccessful'));
+      .then(() => { dispatch(itemDeleted(itemId)) })
+      .catch(() => console.log('Deleting item unsuccessful'));
   }
 }

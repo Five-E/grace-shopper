@@ -1,11 +1,14 @@
-var Sequelize = require('sequelize');
-var db = require('../db');
+var Sequelize = require('sequelize')
+var db = require('../db')
 
 var Status = db.define('status', {
     name: {
-        type: Sequelize.CHAR,
-        allowNull: false
+        type: Sequelize.TEXT,
+        allowNull: false,
+        unique: true,
+        primaryKey: true,
+        autoIncrement: false
     }
 });
 
-module.exports = Status;
+module.exports = Status

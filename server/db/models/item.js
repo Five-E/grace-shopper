@@ -18,6 +18,12 @@ const Item = db.define('item', {
 			min: 0
 		}
 	},
+	priceDollars: {
+		type: Sequelize.VIRTUAL,
+		get: function () {
+			return '$'+ parseFloat(this.price).toFixed(2)
+		}
+	},
 	stock: {
 		type: Sequelize.INTEGER,
 		allowNull: false,
